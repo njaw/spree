@@ -1,0 +1,39 @@
+
+<% content_for :templates do %>
+  <script type="text/template" id="products-template">
+    <ul id="products" class="inline product-listing">
+    </ul>
+  </script>
+
+  <script type="text/template" id="product-preview-template">
+      <li id="product_<%%= id %>" class="columns three alpha" itemscope itemtype="http://schema.org/Product">
+      <div class="product-image">
+        <img src='<%%= small_image_url() %>'>
+      </div>
+      <a class='info' itemprop='name' title='<%%= name %>'><%%= name %></a>
+      <span class="price selling" itemprop="price"><%%= display_price %></span>
+    </li>
+  </script>
+
+  <script type="text/template" id="product-template">
+    <div>
+      <div class='columns six alpha'>
+        <div class="columns six alpha" data-hook="product_left_part">
+          <div class="row" data-hook="product_left_part_wrap">
+
+            <div id="product-images" data-hook="product_images">
+              <div id="main-image" data-hook="">
+                  <img alt="<%%= name %>" itemprop="image" src="<%%= product_image_url() %>">
+              </div>
+              <div id="thumbnails" data-hook="">
+                <ul id="product-thumbnails" class="thumbnails inline" data-hook="">
+                    <li class='tmb-all'><img src='<%%= mini_image_url() %>'></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+<% end %>
