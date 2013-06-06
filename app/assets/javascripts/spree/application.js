@@ -16,14 +16,14 @@ SpreeStore.navigate = function(route, options) {
 }
 
 SpreeStore.getCurrentRoute = function() {
-  return Backbone.history.fragment();
+  return Backbone.history.fragment;
 }
 
 SpreeStore.on("initialize:after", function(){
   if (Backbone.history) {
     Backbone.history.start();
   }
-  if (this.getCurrentRoute === "") {
+  if (this.getCurrentRoute() === "") {
     SpreeStore.trigger("products:list")
   }
 });

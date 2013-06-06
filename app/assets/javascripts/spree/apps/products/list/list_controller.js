@@ -8,7 +8,7 @@ SpreeStore.module('Products.List',function(ProductsList, SpreeStore, Backbone,Ma
       });
 
       products_list_view.on("itemview:product:view", function(childView, model){
-        SpreeStore.Products.Show.Controller.showProduct(model)
+        SpreeStore.Products.Show.Controller.showProduct(model.id)
       });
 
       SpreeStore.mainRegion.show(products_list_view)

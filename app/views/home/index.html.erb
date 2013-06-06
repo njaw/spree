@@ -16,22 +16,54 @@
   </script>
 
   <script type="text/template" id="product-template">
-    <div>
-      <div class='columns six alpha'>
-        <div class="columns six alpha" data-hook="product_left_part">
-          <div class="row" data-hook="product_left_part_wrap">
+    <div class="columns six alpha" data-hook="product_left_part">
+      <div class="row" data-hook="product_left_part_wrap">
 
-            <div id="product-images" data-hook="product_images">
-              <div id="main-image" data-hook="">
-                  <img alt="<%%= name %>" itemprop="image" src="<%%= product_image_url() %>">
-              </div>
-              <div id="thumbnails" data-hook="">
-                <ul id="product-thumbnails" class="thumbnails inline" data-hook="">
-                    <li class='tmb-all'><img src='<%%= mini_image_url() %>'></li>
-                </ul>
+        <div id="product-images" data-hook="product_images">
+          <div id="main-image" data-hook="">
+              <img alt="<%%= name %>" itemprop="image" src="<%%= product_image_url() %>">
+          </div>
+          <div id="thumbnails" data-hook="">
+            <ul id="product-thumbnails" class="thumbnails inline" data-hook="">
+              <li class='tmb-all'><img src='<%%= mini_image_url() %>'></li>
+            </ul>
+          </div>
+          <div data-hook="product_properties">
+            <h6 class="product-section-title">Properties</h6>
+            <table id="product-properties" class="table-display" data-hook="">
+              <tbody>
+                <%% _.map(product_properties, function(property) { %>
+                  <tr> 
+                    <td><strong><%%= property.property_name %></strong></td>
+                    <td><%%= property.value %></td>
+                  </tr>
+                <%% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns ten omega" data-hook="product_right_part">
+      <div class="row" data-hook="product_right_part_wrap">
+        <div id="product-description" data-hook="product_description">
+          <h1 class="product-title" itemprop="name"><%%= name %></h1>
+          <div itemprop="description" data-hook="description">
+            <%%= description %>
+          </div>
+          <div id="cart-form" data-hook="cart_form">
+            <form accept-charset="UTF-8" action="/orders/populate" method="post"><div style="margin:0;padding:0;display:inline">
+          </div>
+          <div id="inside-product-cart-form" data-hook="inside_product_cart_form" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+              <div data-hook="product_price" class="columns five  alpha ">
+                
+                <div id="product-price">
+                  <h6 class="product-section-title">Price</h6>
+                  <div><span class="price selling" itemprop="price"><%%= display_price %></span></div>
+                </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

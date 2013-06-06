@@ -11,8 +11,8 @@ SpreeStore.module('StoreApp',function(StoreApp, SpreeStore, Backbone,Marionette,
       SpreeStore.Products.List.Controller.listProducts();
     },
 
-    showProduct: function(model) {
-      SpreeStore.Products.Show.Controller.showProduct(model);
+    showProduct: function(id) {
+      SpreeStore.Products.Show.Controller.showProduct(id);
     }
   }
 
