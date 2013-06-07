@@ -32,7 +32,7 @@
             <h6 class="product-section-title">Properties</h6>
             <table id="product-properties" class="table-display" data-hook="">
               <tbody>
-                <%% _.map(product_properties, function(property) { %>
+                <%% _.each(product_properties, function(property) { %>
                   <tr> 
                     <td><strong><%%= property.property_name %></strong></td>
                     <td><%%= property.value %></td>
