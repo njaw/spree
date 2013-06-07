@@ -25,15 +25,18 @@
           </div>
           <div id="thumbnails" data-hook="">
             <ul id="product-thumbnails" class="thumbnails inline" data-hook="">
-              <li class='tmb-all'><img src='<%%= mini_image_url() %>'></li>
+              <%% _.each(thumbnails(), function(thumbnail) { %>
+                <li class='tmb-all'><img src='<%%= thumbnail %>'></li>
+              <%% }) %>
             </ul>
           </div>
           <div data-hook="product_properties">
             <h6 class="product-section-title">Properties</h6>
             <table id="product-properties" class="table-display" data-hook="">
               <tbody>
+                <%% var pedal = _.cycle(["odd", "even"]); %>
                 <%% _.each(product_properties, function(property) { %>
-                  <tr> 
+                  <tr class="<%%= pedal() %>"> 
                     <td><strong><%%= property.property_name %></strong></td>
                     <td><%%= property.value %></td>
                   </tr>

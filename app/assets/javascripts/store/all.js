@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require underscore
+//= require underscore_mixins
 //= require backbone
 //= require backbone.marionette
 //= require spree/application
