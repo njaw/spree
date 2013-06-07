@@ -13,6 +13,10 @@ SpreeStore.module('StoreApp',function(StoreApp, SpreeStore, Backbone,Marionette,
 
     showProduct: function(id) {
       SpreeStore.Products.Show.Controller.showProduct(id);
+    },
+
+    showCartInfo: function() {
+      SpreeStore.Cart.Controller.showCartInfo();
     }
   }
 
@@ -25,5 +29,6 @@ SpreeStore.module('StoreApp',function(StoreApp, SpreeStore, Backbone,Marionette,
     new StoreApp.Router({
       controller: API
     })
+    API.showCartInfo();
   })
 })

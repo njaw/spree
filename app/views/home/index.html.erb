@@ -1,4 +1,6 @@
+<div class="fast-freddy">
 
+</div>
 <% content_for :templates do %>
   <script type="text/template" id="products-template">
     <ul id="products" class="inline product-listing">
@@ -54,15 +56,18 @@
           <div itemprop="description" data-hook="description">
             <%%= description %>
           </div>
-          <div id="cart-form" data-hook="cart_form">
-            <form accept-charset="UTF-8" action="/orders/populate" method="post"><div style="margin:0;padding:0;display:inline">
-          </div>
           <div id="inside-product-cart-form" data-hook="inside_product_cart_form" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
-              <div data-hook="product_price" class="columns five  alpha ">
+              <div data-hook="product_price" class="columns five alpha">
                 
                 <div id="product-price">
                   <h6 class="product-section-title">Price</h6>
                   <div><span class="price selling" itemprop="price"><%%= display_price %></span></div>
+                </div>
+                <div class='add-to-cart'>
+                  <input class="title" id="variants_2" min="1" name="variants[2]" type="number" value="1">
+                  <button class="large primary" id="add-to-cart-button" type="submit">
+                    Add To Cart
+                  </button>
                 </div>
               </div>
             </div>
@@ -71,4 +76,18 @@
       </div>
     </div>
   </script>
+
+  <script type='text/template' id='cart-template'>
+    Cart: (<%%= total_quantity %>) <span class='amount'><%%= display_item_total %></span>
+  </script>
 <% end %>
+<script>
+  $(document).ready(function() {
+    if (SpreeStore.current_order_id) {
+      $('#link-to-cart').html("<a href='#'><%= Spree.t(:cart) %>: <img src='/assets/loading.gif'></a>")
+    } else {
+      $('#link-to-cart').html("<a href='#'><%= Spree.t(:cart) %>: <%= Spree.t(:empty) %></a>")
+    }
+    SpreeStore.start();
+  })
+</script>

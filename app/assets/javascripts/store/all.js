@@ -18,3 +18,6 @@
 //= require backbone.marionette
 //= require spree/application
 
+$(document).ajaxSend(function(e, xhr, options) {
+  xhr.setRequestHeader("X-SPREE-TOKEN", Spree.api_key);
+});

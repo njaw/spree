@@ -1,13 +1,16 @@
 //= require_self
 //= require_tree ../spree/entities
 //= require_tree ../spree/apps/store
+//= require_tree ../spree/apps/cart
 //= require_tree ../spree/apps/products/list
 //= require_tree ../spree/apps/products/show
 Spree = {}
 SpreeStore = new Backbone.Marionette.Application()
+SpreeStore.current_order_id = window.localStorage['current_order_id']
 
 SpreeStore.addRegions({
-    mainRegion: "#content"
+    mainRegion: ".fast-freddy",
+    cartInfo: '#link-to-cart'
 });
 
 SpreeStore.navigate = function(route, options) {
@@ -27,7 +30,3 @@ SpreeStore.on("initialize:after", function(){
     SpreeStore.trigger("products:list")
   }
 });
-
-$(document).ready(function() {
-  SpreeStore.start();
-})

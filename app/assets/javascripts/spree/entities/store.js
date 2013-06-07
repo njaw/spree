@@ -31,4 +31,10 @@ SpreeStore.module('Entities',function(Entities, SpreeStore, Backbone,Marionette,
       return '/store/api/products/' + this.product.id + '/variants' 
     }
   })
+
+  Entities.Order = Backbone.Model.extend({
+    url: function() {
+      return '/store/api/orders/' + this.id
+    }
+  })
 })
