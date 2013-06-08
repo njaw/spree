@@ -1,0 +1,8 @@
+<script type='text/template' id='taxonomy-item'>
+  <h6 class="taxonomy-root">Shop by <%%= name %></h6>
+  <ul class='taxons-list'>
+    <%% _.each(root.taxons, function(taxon) { %>
+      <li><a href='#' data-taxon-id='<%%= taxon.id %>'><%%= taxon.name %></a></li>
+    <%% }) %>
+  </ul>
+</script>

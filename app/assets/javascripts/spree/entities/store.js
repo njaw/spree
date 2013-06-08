@@ -32,6 +32,17 @@ SpreeStore.module('Entities',function(Entities, SpreeStore, Backbone,Marionette,
     }
   })
 
+  Entities.Taxonomy = Backbone.Model.extend({})
+
+  Entities.Taxonomies = Backbone.Collection.extend({
+    model: Entities.Taxonomy,
+    url: '/store/api/taxonomies',
+
+    parse: function(data) {
+      return data.taxonomies;
+    }
+  })
+
   Entities.Order = Backbone.Model.extend({
     url: function() {
       return '/store/api/orders/' + this.id

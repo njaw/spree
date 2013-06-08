@@ -8,7 +8,12 @@ SpreeStore.module('StoreApp',function(StoreApp, SpreeStore, Backbone,Marionette,
 
   var API = {
     listProducts: function() {
+      SpreeStore.Taxonomies.List.Controller.listTaxonomies();
       SpreeStore.Products.List.Controller.listProducts();
+    },
+
+    listTaxonomies: function() {
+      SpreeStore.Taxonomies.List.Controller.listTaxonomies();
     },
 
     showProduct: function(id) {
@@ -23,6 +28,7 @@ SpreeStore.module('StoreApp',function(StoreApp, SpreeStore, Backbone,Marionette,
   SpreeStore.on("products:list", function() {
     SpreeStore.navigate("products")
     API.listProducts();
+    API.listTaxonomies();
   })
 
   SpreeStore.addInitializer(function() {
