@@ -1,3 +1,57 @@
 <script type='text/template' id='cart-template'>
-  Cart: (<%%= total_quantity %>) <span class='amount'><%%= display_item_total %></span>
+  <div data-hook="outside_cart_form">
+    <div data-hook="inside_cart_form">
+      <div data-hook="cart_items">
+          
+        <table id="cart-detail" data-hook="">
+          <thead>
+            <tr data-hook="cart_items_headers">
+              <th class="cart-item-description-header" colspan="2">Item</th>
+              <th class="cart-item-price-header">Price</th>
+              <th class="cart-item-quantity-header">Qty</th>
+              <th class="cart-item-total-header">Total</th>
+              <th class="cart-item-delete-header"></th>
+            </tr>
+          </thead>
+          <tbody id="line_items" data-hook="">
+            <%% _.each(line_items, function(line_item) { %>
+              <tr class="line-item">
+                <td class="cart-item-image" data-hook="cart_item_image">
+                  <a href='#' data-product-permalink='<%%= permalink(line_item) %>'>
+                    <img alt="<%%= line_item.variant.name %>" src="<%%= displayImage(line_item, 'small') %>">
+                  </a>
+                </td>
+                <td class="cart-item-description" data-hook="cart_item_description">
+                  <h4><a href='#' data-product-permalink='<%%= permalink(line_item) %>'><%%= line_item.variant.name %></a></h4>
+                  <%%= line_item.variant.description %>
+                </td>
+                <td class="cart-item-price" data-hook="cart_item_price">
+                  <%%= line_item.display_single_amount %>
+                </td>
+                <td class="cart-item-quantity" data-hook="cart_item_quantity">
+                  <input class="line_item_quantity" id="order_line_items_attributes_0_quantity" min="0" name="order[line_items_attributes][0][quantity]" size="5" type="number" value="<%%= line_item.quantity %>">
+                </td>
+                <td class="cart-item-total" data-hook="cart_item_total">
+                  <%%= line_item.display_total_amount %>
+                </td>
+                <td class="cart-item-delete" data-hook="cart_item_delete">
+                  <a href="#" class="delete" id="delete_line_item_4"><img alt="Delete" src="/assets/icons/delete.png"></a>
+                </td>
+              </tr>
+            <%% }) %>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="subtotal" data-hook="" class="columns sixteen alpha omega">
+        <h5>Subtotal: <span class="order-total"><%%= display_item_total %></span></h5>
+      </div>
+
+      <div class="links columns sixteen alpha omega" data-hook="cart_buttons">
+        <input id="order_coupon_code" name="order[coupon_code]" placeholder="Coupon code" size="10" type="text">
+        <button class="primary" id="update-button">Update</button>
+        <button class="button checkout primary" id="checkout-link" name="checkout">Checkout</button>
+      </div>
+    </div>
+  </div>
 </script>

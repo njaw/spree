@@ -3,7 +3,8 @@ SpreeStore.module('StoreApp',function(StoreApp, SpreeStore, Backbone,Marionette,
     appRoutes: {
       "products": "listProducts",
       "products/:id": "showProduct",
-      "products/page/:number": "listProducts"
+      "products/page/:number": "listProducts",
+      "cart": "previewCart"
     }
   });
 
@@ -23,6 +24,10 @@ SpreeStore.module('StoreApp',function(StoreApp, SpreeStore, Backbone,Marionette,
 
     showCartInfo: function() {
       SpreeStore.Cart.Controller.showCartInfo();
+    },
+
+    previewCart: function() {
+      SpreeStore.Cart.Controller.preview();
     }
   }
 
@@ -33,6 +38,8 @@ SpreeStore.module('StoreApp',function(StoreApp, SpreeStore, Backbone,Marionette,
   })
 
   SpreeStore.addInitializer(function() {
+    $("#sidebar").hide()
+    $("#content").attr("class", "sixteen")
     new StoreApp.Router({
       controller: API
     })

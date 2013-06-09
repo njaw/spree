@@ -7,10 +7,14 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
           total_quantity: window.localStorage['total_quantity'],
           display_item_total: window.localStorage['display_item_total']
         })
-        var cart_view = new Cart.CartView({
+        var cart_info_view = new Cart.CartInfoView({
           model: model
         })
-        SpreeStore.cartInfo.show(cart_view)
+
+        cart_info_view.on("cart:preview", function() {
+          SpreeStore.Cart.Controller.preview()
+        })
+        SpreeStore.cartInfo.show(cart_info_view)
       }
     },
     addToCart: function(id, quantity) {
@@ -67,12 +71,24 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
       window.localStorage['display_item_total'] = data.display_item_total
       
       model = new SpreeStore.Entities.Order(data)
-      cart_view = new Cart.CartView({
+      cart_info_view = new Cart.CartInfoView({
         model: model
       })
-      $(cart_view.el).animate({opacity: 0.25})
+      $(cart_info_view.el).animate({opacity: 0.25})
       SpreeStore.cartInfo.show(cart_view)
-      $(cart_view.el).animate({opacity: 1})
+      $(cart_info_view.el).animate({opacity: 1})
+    },
+
+    preview: function() {
+      model = new SpreeStore.Entities.Order({ id: SpreeStore.current_order_id })
+      model.fetch({
+        success: function(data) {
+          cart_view = new Cart.CartView({
+            model: data
+          })
+          SpreeStore.mainRegion.show(cart_view)    
+        }
+      });
     }
   }
 })
