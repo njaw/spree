@@ -16,8 +16,12 @@ SpreeStore.module('Products.List',function(ProductsList, SpreeStore, Backbone,Ma
     },
 
     templateHelpers: {
-      small_image_url: function() {
-        return this.variants[0].images[0].small_url
+      displayImage: function(type) {
+        if (this.variants[0].images[0]) {
+          return this.variants[0].images[0][type + '_url'];
+        } else {
+          return "/assets/noimage/" + type + ".png";
+        }
       }
     }
   });

@@ -14,12 +14,14 @@ SpreeStore.module('Products.Show',function(Show, SpreeStore, Backbone,Marionette
     },
 
     templateHelpers: {
-      product_image_url: function() {
-        return this.variants[0].images[0].product_url
+      displayImage: function(type) {
+        if (this.variants[0].images[0]) {
+          return this.variants[0].images[0][type + '_url'];
+        } else {
+          return "/assets/noimage/" + type + ".png";
+        }
       },
-      mini_image_url: function() {
-        return this.variants[0].images[0].mini_url
-      },
+      
       thumbnails: function() {
         return _.flatten(_.map(this.variants, function(variant) {
           return _.map(variant.images, function(image) {
