@@ -10,7 +10,8 @@ SpreeStore.module('Products.Show',function(Show, SpreeStore, Backbone,Marionette
 
     addToCart: function (e) {
       var quantity = $(this.el).find("input").val()
-      this.trigger("product:addToCart", this.model.id, quantity)
+      var variant_id = this.model.variants.first().id
+      this.trigger("product:addToCart", variant_id, quantity)
     },
 
     templateHelpers: {
