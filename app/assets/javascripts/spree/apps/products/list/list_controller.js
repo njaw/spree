@@ -6,6 +6,8 @@ SpreeStore.module('Products.List',function(ProductsList, SpreeStore, Backbone,Ma
         success: function(products) {
           $(".pagination").pagination({
             items: products.total_count,
+            prevText: "&laquo; Prev",
+            nextText: "Next &raquo;",
             itemsOnPage: products.per_page,
             hrefTextPrefix: "#products/page/",
             currentPage: page,

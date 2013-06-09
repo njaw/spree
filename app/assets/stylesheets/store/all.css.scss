@@ -9,3 +9,12 @@
  *= require_self
  *= require_tree .
 */
+
+.pagination ul { 
+  list-style-type: none;
+
+  li {
+    margin-left: 10px;
+    display: inline;
+  }
+}
