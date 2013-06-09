@@ -1,5 +1,6 @@
 SpreeStore.module('Entities',function(Entities, SpreeStore, Backbone,Marionette,$,_){
   Entities.Product = Backbone.Model.extend({
+    idAttribute: "permalink",
     url: function() {
       return '/store/api/products/' + this.id;
     },
