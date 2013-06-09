@@ -13,8 +13,7 @@ SpreeStore.module('Products.Show',function(Show, SpreeStore, Backbone,Marionette
             SpreeStore.Cart.Controller.addToCart(model, quantity)
           });
           $('.pagination').hide();
-          $('#sidebar').hide();
-          $('#content').attr('class', 'columns sixteen');
+          SpreeStore.noSidebar()
           SpreeStore.mainRegion.show(product_view)
         }
       })

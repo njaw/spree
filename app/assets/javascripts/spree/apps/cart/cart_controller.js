@@ -75,18 +75,28 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
         model: model
       })
       $(cart_info_view.el).animate({opacity: 0.25})
-      SpreeStore.cartInfo.show(cart_view)
+      SpreeStore.cartInfo.show(cart_info_view)
       $(cart_info_view.el).animate({opacity: 1})
     },
 
     preview: function() {
+      console.log("previewing cart")
       model = new SpreeStore.Entities.Order({ id: SpreeStore.current_order_id })
       model.fetch({
         success: function(data) {
           cart_view = new Cart.CartView({
             model: data
           })
-          SpreeStore.mainRegion.show(cart_view)    
+
+          line_items_view = new Cart.LineItems({
+            collection: new SpreeStore.Entities.LineItems(data.attributes.line_items)
+          })
+
+          SpreeStore.mainRegion.show(cart_view)
+          SpreeStore.noSidebar()
+          SpreeStore.cart.show(line_items_view)
+
+          console.log(line_items_view.el.innerHTML)
         }
       });
     }

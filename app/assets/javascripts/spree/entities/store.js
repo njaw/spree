@@ -51,4 +51,10 @@ SpreeStore.module('Entities',function(Entities, SpreeStore, Backbone,Marionette,
       return '/store/api/orders/' + this.id
     }
   })
+
+  Entities.LineItem = Backbone.Model.extend({})
+
+  Entities.LineItems = Backbone.Collection.extend({
+    model: Entities.LineItem
+  })
 })

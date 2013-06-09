@@ -38,8 +38,7 @@ SpreeStore.module('StoreApp',function(StoreApp, SpreeStore, Backbone,Marionette,
   })
 
   SpreeStore.addInitializer(function() {
-    $("#sidebar").hide()
-    $("#content").attr("class", "sixteen")
+    SpreeStore.noSidebar()
     new StoreApp.Router({
       controller: API
     })

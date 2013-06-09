@@ -30,8 +30,14 @@ SpreeStore.Sidebar = Backbone.Marionette.Region.extend({
 SpreeStore.addRegions({
     mainRegion: SpreeStore.MainRegion,
     cartInfo: '#link-to-cart',
-    sidebar: SpreeStore.Sidebar
+    sidebar: SpreeStore.Sidebar,
+    cart: "#cart"
 });
+
+SpreeStore.noSidebar = function() {
+  SpreeStore.sidebar.close();
+  $('#content').attr('class', 'columns sixteen');
+}
 
 
 SpreeStore.navigate = function(route, options) {

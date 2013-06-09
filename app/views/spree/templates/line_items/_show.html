@@ -1,0 +1,23 @@
+<script type='text/template' id='line-item-template'>
+  <td class="cart-item-image" data-hook="cart_item_image">
+    <a href='#'>
+      <img alt="<%%= variant.name %>" src="<%%= displayImage('small') %>" data-product-permalink='<%%= permalink() %>'>
+    </a>
+  </td>
+  <td class="cart-item-description" data-hook="cart_item_description">
+    <h4><a href='#' data-product-permalink='<%%= permalink() %>'><%%= variant.name %></a></h4>
+    <%%= variant.description %>
+  </td>
+  <td class="cart-item-price" data-hook="cart_item_price">
+    <%%= display_single_amount %>
+  </td>
+  <td class="cart-item-quantity" data-hook="cart_item_quantity">
+    <input class="line_item_quantity" id="order_line_items_attributes_0_quantity" min="0" name="order[line_items_attributes][0][quantity]" size="5" type="number" value="<%%= quantity %>">
+  </td>
+  <td class="cart-item-total" data-hook="cart_item_total">
+    <%%= display_total_amount %>
+  </td>
+  <td class="cart-item-delete" data-hook="cart_item_delete">
+    <a href="#" class="delete" id="delete_line_item_4"><img alt="Delete" src="/assets/icons/delete.png"></a>
+  </td>
+</script>
