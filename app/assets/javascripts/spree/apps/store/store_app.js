@@ -2,14 +2,15 @@ SpreeStore.module('StoreApp',function(StoreApp, SpreeStore, Backbone,Marionette,
   StoreApp.Router = Marionette.AppRouter.extend({
     appRoutes: {
       "products": "listProducts",
-      "products/:id": "showProduct"
+      "products/:id": "showProduct",
+      "products/page/:number": "listProducts"
     }
   });
 
   var API = {
-    listProducts: function() {
+    listProducts: function(pageNumber) {
       SpreeStore.Taxonomies.List.Controller.listTaxonomies();
-      SpreeStore.Products.List.Controller.listProducts();
+      SpreeStore.Products.List.Controller.listProducts(pageNumber);
     },
 
     listTaxonomies: function() {

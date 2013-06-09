@@ -17,8 +17,10 @@ SpreeStore.module('Entities',function(Entities, SpreeStore, Backbone,Marionette,
     url: '/store/api/products',
 
     parse: function(data) {
+      this.total_count = data.total_count;
+      this.per_page = data.per_page;
       return data.products;
-    }
+    },
   });
 
   Entities.Variant = Backbone.Model.extend({

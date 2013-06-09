@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.simplePagination
 //= require underscore
 //= require underscore_mixins
 //= require backbone
