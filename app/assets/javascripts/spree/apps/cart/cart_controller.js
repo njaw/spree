@@ -91,8 +91,6 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
 
           SpreeStore.mainRegion.show(cart_view)
           SpreeStore.noSidebar()
-
-          // console.log(line_items_view.el.innerHTML)
         }
       });
     }

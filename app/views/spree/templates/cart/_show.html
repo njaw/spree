@@ -1,4 +1,5 @@
 <script type='text/template' id='cart-template'>
+  <h1><%= Spree.t(:shopping_cart) %></h1>
   <div data-hook="outside_cart_form">
     <div data-hook="inside_cart_form">
       <div data-hook="cart_items">
@@ -17,7 +18,7 @@
         </table>
       </div>
       <div id="subtotal" data-hook="" class="columns sixteen alpha omega">
-        <h5>Subtotal: <span class="order-total"><%%= display_item_total %></span></h5>
+        <h5>Subtotal: <span class="order-total"><%%= line_items_total() %></span></h5>
       </div>
       <div class="links columns sixteen alpha omega" data-hook="cart_buttons">
         <input id="order_coupon_code" name="order[coupon_code]" placeholder="Coupon code" size="10" type="text">

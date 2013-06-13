@@ -9,13 +9,13 @@
     <%%= variant.description %>
   </td>
   <td class="cart-item-price" data-hook="cart_item_price">
-    <%%= display_single_amount %>
+    <%%= single_display_amount %>
   </td>
   <td class="cart-item-quantity" data-hook="cart_item_quantity">
     <input class="line_item_quantity" data-line-item-id='<%%= id %>' size="5" type="number" value="<%%= quantity %>" min='0'>
   </td>
   <td class="cart-item-total" data-hook="cart_item_total">
-    <%%= display_total_amount %>
+    <%%= display_amount %>
   </td>
   <td class="cart-item-delete" data-hook="cart_item_delete">
     <a href="#" class="delete" id="delete_line_item_4"><img alt="Delete" src="/assets/icons/delete.png"></a>

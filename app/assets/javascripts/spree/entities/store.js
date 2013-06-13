@@ -58,8 +58,10 @@ SpreeStore.module('Entities',function(Entities, SpreeStore, Backbone,Marionette,
     },
 
     setQuantity: function(quantity) {
-      this.set('quantity', quantity)
-      this.set('display_total_amount', Spree.Money.format(quantity * this.get('price')))
+      this.set('quantity', quantity);
+      var total = quantity * this.get('price');
+      this.set('display_total_amount', Spree.Money.format(total))
+      this.set('total', total)
     },
 
     paramRoot: 'line_item'

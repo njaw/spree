@@ -48,7 +48,6 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     updateQuantity: function(e) {
       this.model.setQuantity(e.target.value);
       this.$el.find(".cart-item-total").html(this.model.get('display_total_amount'))
-      this.trigger("lineItem:updateQuantity")
     },
 
     delete: function() {
@@ -60,7 +59,27 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
   Cart.CartView = Backbone.Marionette.CompositeView.extend({
     template: '#cart-template',
     itemView: Cart.LineItem,
-    itemViewContainer: "#line_items"
+    itemViewContainer: "#line_items",
+
+    collectionEvents: {
+      "change": "updateTotalPrice"
+    },
+
+    updateTotalPrice: function(model) {
+      var amount = _.reduce(model.collection.models, function(amount, line_item) {
+        return amount + parseFloat(line_item.get('total'))
+      }, 0)
+      this.$el.find('.order-total').html(Spree.Money.format(amount))
+    },
+
+    templateHelpers: {
+      line_items_total: function() {
+        var amount = _.reduce(this.line_items, function(amount, line_item) {
+          return amount + parseFloat(line_item.total)
+         }, 0)
+        return Spree.Money.format(amount);
+      }
+    }
   })
 
   Cart.LineItems = Backbone.Marionette.CompositeView.extend({
