@@ -26,6 +26,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     },
 
     newCheckout: function(id, quantity) {
+      // TODO: I wonder if this could be moved into Backbone-esque code...
       $.ajax({
         type: 'POST', 
         url: '/store/api/checkouts',
@@ -46,6 +47,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     },
 
     updateOrder: function(id, quantity) {
+      // TODO: I wonder if this could be moved into Backbone-esque code...
       $.ajax({
         type: 'PUT', 
         url: '/store/api/orders/' + SpreeStore.current_order_id,
