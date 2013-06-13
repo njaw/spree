@@ -11,6 +11,7 @@ SpreeStore.module('Products.Show',function(Show, SpreeStore, Backbone,Marionette
 
           product_view.on("product:addToCart", function(model, quantity){
             SpreeStore.Cart.Controller.addToCart(model, quantity)
+            SpreeStore.navigate("cart")
           });
           $('.pagination').hide();
           SpreeStore.noSidebar()
