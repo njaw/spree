@@ -1,13 +1,24 @@
 <script type='text/template' id='cart-template'>
   <div data-hook="outside_cart_form">
     <div data-hook="inside_cart_form">
-      <div data-hook="cart_items" id="cart">
+      <div data-hook="cart_items">
+        <table id='cart-detail' data-hook>
+        <thead>
+          <tr data-hook="cart_items_headers">
+            <th class="cart-item-description-header" colspan="2">Item</th>
+            <th class="cart-item-price-header">Price</th>
+            <th class="cart-item-quantity-header">Qty</th>
+            <th class="cart-item-total-header">Total</th>
+            <th class="cart-item-delete-header"></th>
+          </tr>
+        </thead>
+        <tbody id='line_items'>
+        </tbody>
+        </table>
       </div>
-
       <div id="subtotal" data-hook="" class="columns sixteen alpha omega">
         <h5>Subtotal: <span class="order-total"><%%= display_item_total %></span></h5>
       </div>
-
       <div class="links columns sixteen alpha omega" data-hook="cart_buttons">
         <input id="order_coupon_code" name="order[coupon_code]" placeholder="Coupon code" size="10" type="text">
         <button class="primary" id="update-button">Update</button>
@@ -15,4 +26,14 @@
       </div>
     </div>
   </div>
+
+  <form>
+  <div id="empty-cart" data-hook="">
+    <p id="clear_cart_link" data-hook="">
+      <input class="button gray" name="commit" type="submit" value="Empty Cart">
+      or
+      <a href="/store/products" class="continue button gray">Continue shopping</a>
+    </p>
+  </div>
+  </form>
 </script>

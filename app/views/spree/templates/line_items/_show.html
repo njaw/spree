@@ -12,7 +12,7 @@
     <%%= display_single_amount %>
   </td>
   <td class="cart-item-quantity" data-hook="cart_item_quantity">
-    <input class="line_item_quantity" id="order_line_items_attributes_0_quantity" min="0" name="order[line_items_attributes][0][quantity]" size="5" type="number" value="<%%= quantity %>">
+    <input class="line_item_quantity" data-line-item-id='<%%= id %>' size="5" type="number" value="<%%= quantity %>" min='0'>
   </td>
   <td class="cart-item-total" data-hook="cart_item_total">
     <%%= display_total_amount %>

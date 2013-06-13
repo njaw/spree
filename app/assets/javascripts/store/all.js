@@ -17,6 +17,7 @@
 //= require underscore_mixins
 //= require backbone
 //= require backbone.marionette
+//= require backbone-rails
 //= require spree/application
 
 $(document).ajaxSend(function(e, xhr, options) {

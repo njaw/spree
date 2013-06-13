@@ -52,9 +52,23 @@ SpreeStore.module('Entities',function(Entities, SpreeStore, Backbone,Marionette,
     }
   })
 
-  Entities.LineItem = Backbone.Model.extend({})
+  Entities.LineItem = Backbone.Model.extend({
+    url: function() {
+      return '/store/api/orders/' + SpreeStore.current_order_id + '/line_items/' + this.id
+    },
+
+    setQuantity: function(quantity) {
+      this.set('quantity', quantity)
+      this.set('display_total_amount', Spree.Money.format(quantity * this.get('price')))
+    },
+
+    paramRoot: 'line_item'
+  })
 
   Entities.LineItems = Backbone.Collection.extend({
-    model: Entities.LineItem
+    model: Entities.LineItem,
+    url: function() {
+      return '/store/api/orders/' + SpreeStore.current_order_id + '/line_items'
+    }
   })
 })

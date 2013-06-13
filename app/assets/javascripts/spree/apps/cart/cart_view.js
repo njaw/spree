@@ -13,10 +13,6 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     }
   });
 
-  Cart.CartView = Backbone.Marionette.ItemView.extend({
-    template: '#cart-template'
-  })
-
   Cart.LineItem = Backbone.Marionette.ItemView.extend({
     tagName: 'tr',
     template: "#line-item-template",
@@ -24,7 +20,9 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
 
     events: {
       "click .cart-item-image": "viewProduct",
-      "click h4": "viewProduct"
+      "click h4": "viewProduct",
+      "change .line_item_quantity": "updateQuantity",
+      "click .delete": "delete"
     },
 
     templateHelpers: {
@@ -45,7 +43,24 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
       SpreeStore.navigate("/products/" + permalink, true)
       e.preventDefault();
       e.stopPropagation();
+    },
+
+    updateQuantity: function(e) {
+      this.model.setQuantity(e.target.value);
+      this.$el.find(".cart-item-total").html(this.model.get('display_total_amount'))
+      this.trigger("lineItem:updateQuantity")
+    },
+
+    delete: function() {
+      this.model.destroy()
     }
+  })
+
+
+  Cart.CartView = Backbone.Marionette.CompositeView.extend({
+    template: '#cart-template',
+    itemView: Cart.LineItem,
+    itemViewContainer: "#line_items"
   })
 
   Cart.LineItems = Backbone.Marionette.CompositeView.extend({

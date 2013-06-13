@@ -1,8 +1,10 @@
 //= require_self
+//= require ../spree/money
 //= require_tree ../spree/entities
 //= require_tree ../spree/apps/store
 //= require_tree ../spree/apps/cart
 //= require_tree ../spree/apps/taxonomies/list
+//= require_tree ../spree/apps/taxonomies/show
 //= require_tree ../spree/apps/products/list
 //= require_tree ../spree/apps/products/show
 Spree = {}
@@ -39,7 +41,6 @@ SpreeStore.noSidebar = function() {
   $('#content').attr('class', 'columns sixteen');
 }
 
-
 SpreeStore.navigate = function(route, options) {
   options || (options = {});
   Backbone.history.navigate(route, options)
@@ -48,6 +49,12 @@ SpreeStore.navigate = function(route, options) {
 SpreeStore.getCurrentRoute = function() {
   return Backbone.history.fragment;
 }
+
+SpreeStore.on("initialize:before", function(){
+  $.get('/store/api/config/money', function(data) {
+    Spree.Money.Settings = data  
+  })
+})
 
 SpreeStore.on("initialize:after", function(){
   if (Backbone.history) {
