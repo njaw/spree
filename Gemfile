@@ -14,7 +14,7 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'marionette-rails', '1.0.3'
-  gem 'backbone-on-rails', '1.0.0.0'
+  gem 'backbone-rails', '1.0.0'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -41,3 +41,4 @@ gem 'jquery-rails', '2.2.1'
 
 gem 'spree', :github => 'radar/spree', :branch => "master"
 gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => "master"
+gem 'pry'
