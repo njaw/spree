@@ -6,7 +6,11 @@
   </td>
   <td class="cart-item-description" data-hook="cart_item_description">
     <h4><a href='#' data-product-permalink='<%%= permalink() %>'><%%= variant.name %></a></h4>
-    <%%= variant.description %>
+    <%% if (variant.description.length > 50) { %>      
+      <%%= variant.description.substring(0, 50) %>...
+    <%% } else { %>
+      <%%= variant.description %>
+    <%% } %>
   </td>
   <td class="cart-item-price" data-hook="cart_item_price">
     <%%= single_display_amount %>
