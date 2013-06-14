@@ -38,3 +38,17 @@
   </div>
   </form>
 </script>
+
+<script type='text/template' id='empty-cart-template'>
+        
+  <h1><%= Spree.t(:shopping_cart) %></h1>
+
+
+  <div data-hook="empty_cart">
+    <p><%= Spree.t(:your_cart_is_empty) %></p>
+    <p><button><%= Spree.t(:continue_shopping) %></button></p>
+  </div>
+
+
+        </div>
+</script>
