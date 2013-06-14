@@ -87,7 +87,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
       var amount = _.reduce(model.collection.models, function(amount, line_item) {
         return amount + parseFloat(line_item.get('total'))
       }, 0)
-      this.$el.find('.order-total').html(Spree.Money.format(amount))
+      this.$('.order-total').html(Spree.Money.format(amount))
     },
 
     templateHelpers: {
