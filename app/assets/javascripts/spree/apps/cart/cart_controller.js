@@ -76,6 +76,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
       cart_info_view = new Cart.CartInfoView({
         model: model
       })
+      Cart.Controller.showCartInfo()
       Cart.Controller.preview()
     },
 
