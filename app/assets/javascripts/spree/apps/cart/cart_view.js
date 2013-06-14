@@ -47,7 +47,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
 
     updateQuantity: function(e) {
       this.model.setQuantity(e.target.value);
-      this.$el.find(".cart-item-total").html(this.model.get('display_total_amount'))
+      this.$(".cart-item-total").html(this.model.get('display_total_amount'))
     },
 
     delete: function() {
