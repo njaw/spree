@@ -29,7 +29,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
       // TODO: I wonder if this could be moved into Backbone-esque code...
       $.ajax({
         type: 'POST', 
-        url: '/store/api/checkouts',
+        url: '/store/api/orders',
         data: {
           order: {
             line_items_attributes: [
