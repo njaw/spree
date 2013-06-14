@@ -44,19 +44,13 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     },
 
     updateOrder: function(id, quantity) {
-      // TODO: I wonder if this could be moved into Backbone-esque code...
-      $.ajax({
-        type: 'PUT', 
-        url: '/store/api/orders/' + SpreeStore.current_order_id,
+      $.post({
+        url: '/store/api/orders/' + SpreeStore.current_order_id + '/line_items',
         data: {
           order_token: SpreeStore.current_order_token,
-          order: {
-            line_items_attributes: [
-              {
-                variant_id: id,
-                quantity: quantity
-              }
-            ]
+          line_item: {
+            variant_id: id,
+            quantity: quantity
           }
         },
         success: function(data) {
