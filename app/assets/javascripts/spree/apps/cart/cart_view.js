@@ -9,7 +9,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
 
     viewCart: function(e) {
       SpreeStore.navigate("cart", true)
-      this.trigger("cart:preview")
+      SpreeStore.Cart.Controller.preview()
     }
   });
 

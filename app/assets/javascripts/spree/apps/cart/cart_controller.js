@@ -11,9 +11,6 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
           model: model
         })
 
-        cart_info_view.on("cart:preview", function() {
-          SpreeStore.Cart.Controller.preview()
-        })
         SpreeStore.cartInfo.show(cart_info_view)
       }
     },
