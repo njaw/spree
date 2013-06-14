@@ -52,6 +52,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
         type: 'PUT', 
         url: '/store/api/orders/' + SpreeStore.current_order_id,
         data: {
+          order_token: SpreeStore.current_order_token,
           order: {
             line_items_attributes: [
               {
@@ -68,6 +69,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     },
 
     updateCart: function(data) {
+      window.localStorage['current_order_token'] = SpreeStore.current_order_token = data.token
       window.localStorage['current_order_id'] = SpreeStore.current_order_id = data.number
       window.localStorage['total_quantity'] = data.total_quantity
       window.localStorage['display_item_total'] = data.display_item_total
@@ -81,19 +83,25 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     },
 
     preview: function() {
-      // console.log("previewing cart")
-      model = new SpreeStore.Entities.Order({ id: SpreeStore.current_order_id })
-      model.fetch({
-        success: function(data) {
-          cart_view = new Cart.CartView({
-            model: data,
-            collection: new SpreeStore.Entities.LineItems(data.attributes.line_items)
-          })
 
-          SpreeStore.mainRegion.show(cart_view)
-          SpreeStore.noSidebar()
-        }
-      });
+      if (SpreeStore.current_order_id) {
+        model = new SpreeStore.Entities.Order({ id: SpreeStore.current_order_id })
+        model.fetch({ 
+          data: $.param({ order_token: SpreeStore.current_order_token}),
+          success: function(data) {
+            cart_view = new Cart.CartView({
+              model: data,
+              collection: new SpreeStore.Entities.LineItems(data.attributes.line_items)
+            })
+
+            SpreeStore.mainRegion.show(cart_view)
+            SpreeStore.noSidebar()
+          }
+        });
+      } else {
+        emptyCartView = new Cart.EmptyCart
+        SpreeStore.mainRegion.show(emptyCartView)
+      }
     }
   }
 })

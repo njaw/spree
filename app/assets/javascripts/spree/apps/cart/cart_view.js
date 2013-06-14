@@ -82,6 +82,16 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     }
   })
 
+  Cart.EmptyCart = Backbone.Marionette.CompositeView.extend({
+    template: '#empty-cart-template',
+
+    events: {
+      "click button": function() {
+        SpreeStore.navigate("/products", true);
+      }
+    }
+  })
+
   Cart.LineItems = Backbone.Marionette.CompositeView.extend({
     tagName: 'table',
     id: 'cart-detail',

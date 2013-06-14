@@ -10,6 +10,7 @@
 Spree = {}
 SpreeStore = new Backbone.Marionette.Application()
 SpreeStore.current_order_id = window.localStorage['current_order_id']
+SpreeStore.current_order_token = window.localStorage['current_order_token']
 
 SpreeStore.MainRegion = Backbone.Marionette.Region.extend({
   el: '.fast-freddy',
