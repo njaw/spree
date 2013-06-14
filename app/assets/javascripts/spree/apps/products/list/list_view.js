@@ -11,7 +11,7 @@ SpreeStore.module('Products.List',function(ProductsList, SpreeStore, Backbone,Ma
     viewProduct: function (e) {
       e.preventDefault();
       e.stopPropagation();
-      Backbone.history.navigate("/products/" + this.model.id)
+      SpreeStore.navigate("/products/" + this.model.id)
       this.trigger("product:view", this.model)
     },
 
