@@ -65,6 +65,24 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
       "change": "updateTotalPrice"
     },
 
+    events: {
+      "click #update-button": "updateOrder"
+    },
+
+    updateOrder: function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      model = new SpreeStore.Models.Order({ id: SpreeStore.current_order_id })
+      $.ajax({
+        method: 'PUT',
+        url: model.url(),
+        data: this.$('#update-cart').serialize(),
+        success: function(data) {
+          Cart.Controller.updateCart(data)
+        }
+      })
+    },
+
     updateTotalPrice: function(model) {
       var amount = _.reduce(model.collection.models, function(amount, line_item) {
         return amount + parseFloat(line_item.get('total'))

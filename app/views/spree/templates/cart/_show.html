@@ -1,31 +1,34 @@
 <script type='text/template' id='cart-template'>
   <h1><%= Spree.t(:shopping_cart) %></h1>
   <div data-hook="outside_cart_form">
-    <div data-hook="inside_cart_form">
-      <div data-hook="cart_items">
-        <table id='cart-detail' data-hook>
-        <thead>
-          <tr data-hook="cart_items_headers">
-            <th class="cart-item-description-header" colspan="2">Item</th>
-            <th class="cart-item-price-header">Price</th>
-            <th class="cart-item-quantity-header">Qty</th>
-            <th class="cart-item-total-header">Total</th>
-            <th class="cart-item-delete-header"></th>
-          </tr>
-        </thead>
-        <tbody id='line_items'>
-        </tbody>
-        </table>
+    <form accept-charset="UTF-8" action="#cart" class="edit_order" id="update-cart" method="post">
+      <div data-hook="inside_cart_form">
+        <div data-hook="cart_items">
+          <table id='cart-detail' data-hook>
+          <thead>
+            <tr data-hook="cart_items_headers">
+              <th class="cart-item-description-header" colspan="2">Item</th>
+              <th class="cart-item-price-header">Price</th>
+              <th class="cart-item-quantity-header">Qty</th>
+              <th class="cart-item-total-header">Total</th>
+              <th class="cart-item-delete-header"></th>
+            </tr>
+          </thead>
+          <tbody id='line_items'>
+          </tbody>
+          </table>
+        </div>
+        <div id="subtotal" data-hook="" class="columns sixteen alpha omega">
+          <h5>Subtotal: <span class="order-total"><%%= line_items_total() %></span></h5>
+        </div>
+        <div class="links columns sixteen alpha omega" data-hook="cart_buttons">
+          <input type='hidden' name='order_token' value='<%%= SpreeStore.current_order_token %>'>
+          <input id="order_coupon_code" name="order[coupon_code]" placeholder="Coupon code" size="10" type="text">
+          <button class="primary" id="update-button">Update</button>
+          <button class="button checkout primary" id="checkout-link" name="checkout">Checkout</button>
+        </div>
       </div>
-      <div id="subtotal" data-hook="" class="columns sixteen alpha omega">
-        <h5>Subtotal: <span class="order-total"><%%= line_items_total() %></span></h5>
-      </div>
-      <div class="links columns sixteen alpha omega" data-hook="cart_buttons">
-        <input id="order_coupon_code" name="order[coupon_code]" placeholder="Coupon code" size="10" type="text">
-        <button class="primary" id="update-button">Update</button>
-        <button class="button checkout primary" id="checkout-link" name="checkout">Checkout</button>
-      </div>
-    </div>
+    </form>
   </div>
 
   <form>
