@@ -1,7 +1,7 @@
 SpreeStore.module('Products.Show',function(Show, SpreeStore, Backbone,Marionette,$,_){
   Show.Controller = {
     showProduct: function(id) {
-      product = new SpreeStore.Entities.Product({ id: id });
+      product = new SpreeStore.Models.Product({ id: id });
       product.fetch({ 
         success: function(model) {
           model.initialize()

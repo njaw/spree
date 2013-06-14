@@ -1,6 +1,6 @@
 //= require_self
 //= require ../spree/money
-//= require_tree ../spree/entities
+//= require_tree ../spree/models
 //= require_tree ../spree/apps/store
 //= require_tree ../spree/apps/cart
 //= require_tree ../spree/apps/taxonomies/list

@@ -1,7 +1,7 @@
 SpreeStore.module('Products.List',function(ProductsList, SpreeStore, Backbone,Marionette,$,_){
   ProductsList.Controller = {
     listProducts: function(page) {
-      var products = new SpreeStore.Entities.Products;
+      var products = new SpreeStore.Models.Products;
       products.fetch({data: $.param({ page: page}),
         success: function(products) {
           $(".pagination").pagination({

@@ -1,7 +1,7 @@
 SpreeStore.module('Taxonomies.List',function(TaxonomiesList, SpreeStore, Backbone,Marionette,$,_){
   TaxonomiesList.Controller = {
     listTaxonomies: function() {
-      var taxonomies = new SpreeStore.Entities.Taxonomies;
+      var taxonomies = new SpreeStore.Models.Taxonomies;
       taxonomies.fetch();
       var taxonomies_list_view = new TaxonomiesList.Taxonomies({
         collection: taxonomies

@@ -2,7 +2,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
   Cart.Controller = {
     showCartInfo: function() {
       if (SpreeStore.current_order_id !== undefined) {
-        model = new SpreeStore.Entities.Order({ 
+        model = new SpreeStore.Models.Order({ 
           id: SpreeStore.current_order_id,
           total_quantity: window.localStorage['total_quantity'],
           display_item_total: window.localStorage['display_item_total']
@@ -74,7 +74,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
       window.localStorage['total_quantity'] = data.total_quantity
       window.localStorage['display_item_total'] = data.display_item_total
       
-      model = new SpreeStore.Entities.Order(data)
+      model = new SpreeStore.Models.Order(data)
       cart_info_view = new Cart.CartInfoView({
         model: model
       })
@@ -85,13 +85,13 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     preview: function() {
 
       if (SpreeStore.current_order_id) {
-        model = new SpreeStore.Entities.Order({ id: SpreeStore.current_order_id })
+        model = new SpreeStore.Models.Order({ id: SpreeStore.current_order_id })
         model.fetch({ 
           data: $.param({ order_token: SpreeStore.current_order_token}),
           success: function(data) {
             cart_view = new Cart.CartView({
               model: data,
-              collection: new SpreeStore.Entities.LineItems(data.attributes.line_items)
+              collection: new SpreeStore.Models.LineItems(data.attributes.line_items)
             })
 
             SpreeStore.mainRegion.show(cart_view)

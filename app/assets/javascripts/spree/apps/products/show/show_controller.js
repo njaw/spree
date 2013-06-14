@@ -1,7 +1,7 @@
 SpreeStore.module('Products.Show',function(Show, SpreeStore, Backbone,Marionette,$,_){
   Show.Controller = {
     showProduct: function(permalink) {
-      product = new SpreeStore.Entities.Product({ permalink: permalink });
+      product = new SpreeStore.Models.Product({ permalink: permalink });
       product.fetch({
         success: function(model) {
           model.initialize()
