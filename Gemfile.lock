@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/radar/spree.git
-  revision: 1499cf9e5a1db7c71aa7d7dcf10b45943b622bb3
+  revision: 5847a97933279b3f40b6e9c9b2be02bb0db4eaaf
   branch: master
   specs:
     spree (2.1.0.beta)
@@ -55,7 +55,7 @@ GIT
 
 GIT
   remote: git://github.com/spree/spree_auth_devise.git
-  revision: 81143963642a4971777dab767b740e386ecae882
+  revision: 5e81490d676842129c65001a900772b97627fcfd
   branch: master
   specs:
     spree_auth_devise (2.1.0)
@@ -188,7 +188,7 @@ GEM
     mime-types (1.23)
     money (5.1.1)
       i18n (~> 0.6.0)
-    multi_json (1.7.6)
+    multi_json (1.7.7)
     multi_xml (0.5.4)
     nokogiri (1.5.10)
     orm_adapter (0.4.0)
