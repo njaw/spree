@@ -2,6 +2,10 @@
   <h1><%= Spree.t(:shopping_cart) %></h1>
   <div data-hook="outside_cart_form">
     <form accept-charset="UTF-8" action="#cart" class="edit_order" id="update-cart" method="post">
+      <p>
+        <label for='order_email'><%= Spree.t(:email) %></label><br>
+        <input type='text' name='order[email]' id='order_email' value="<%%= email %>">
+      </p>
       <div data-hook="inside_cart_form">
         <div data-hook="cart_items">
           <table id='cart-detail' data-hook>

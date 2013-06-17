@@ -4,7 +4,8 @@ SpreeStore.module('StoreApp',function(StoreApp, SpreeStore, Backbone,Marionette,
       "products": "listProducts",
       "products/:id": "showProduct",
       "products/page/:number": "listProducts",
-      "cart": "previewCart"
+      "cart": "previewCart",
+      "checkout": "checkout"
     }
   });
 
@@ -28,6 +29,10 @@ SpreeStore.module('StoreApp',function(StoreApp, SpreeStore, Backbone,Marionette,
 
     previewCart: function() {
       SpreeStore.Cart.Controller.preview();
+    },
+
+    checkout: function() {
+      SpreeStore.Order.Controller.show();
     }
   }
 

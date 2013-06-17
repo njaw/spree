@@ -66,22 +66,45 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     },
 
     events: {
-      "click #update-button": "updateOrder"
+      "click #update-button": "updateOrder",
+      "click #checkout-link": "beginCheckout"
     },
 
-    updateOrder: function(e) {
-      e.stopPropagation();
-      e.preventDefault();
+    updateOrderData: function() {
       model = new SpreeStore.Models.Order({ id: SpreeStore.current_order_id })
+      console.log(this.$('#update-cart').serialize())
       $.ajax({
         method: 'PUT',
         url: model.url(),
         data: this.$('#update-cart').serialize(),
         success: function(data) {
+          Cart.Controller.showCartInfo()
           Cart.Controller.updateCart(data)
         }
       })
+      return model;
     },
+
+    updateOrder: function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      this.updateOrderData()
+    },
+
+    beginCheckout: function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      var model = this.updateOrderData()
+      $.ajax({
+        method: 'PUT',
+        data: { order_token: SpreeStore.current_order_token },
+        url: '/store/api/checkouts/' + model.id + '/next',
+        success: function(data) {
+          SpreeStore.navigate("/checkout", true)
+        }
+      })
+    },
+
 
     updateTotalPrice: function(model) {
       var amount = _.reduce(model.collection.models, function(amount, line_item) {

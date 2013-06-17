@@ -2,8 +2,8 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
   Cart.Controller = {
     showCartInfo: function() {
       if (SpreeStore.current_order_id !== undefined) {
-        model = new SpreeStore.Models.Order({ 
-          id: SpreeStore.current_order_id
+        model = new SpreeStore.Models.Order({
+          number: SpreeStore.current_order_id
         })
         var cart_info_view = new Cart.CartInfoView({
           model: model
@@ -69,7 +69,6 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     },
 
     preview: function() {
-
       if (SpreeStore.current_order_id) {
         model = new SpreeStore.Models.Order({ id: SpreeStore.current_order_id })
         model.fetch({ 
