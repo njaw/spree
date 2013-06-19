@@ -56,6 +56,10 @@ SpreeStore.on("initialize:before", function(){
   $.get('/store/api/config/money', function(data) {
     Spree.Money.Settings = data  
   })
+
+  $.get('/store/api/config', function(data) {
+    Spree.Settings = data
+  })
 })
 
 SpreeStore.on("initialize:after", function(){
