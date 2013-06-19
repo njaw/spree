@@ -12,7 +12,6 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'marionette-rails', '1.0.3'
-  gem 'backbone-rails', '1.0.0'
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -25,3 +24,5 @@ group :development, :test do
   gem 'ffaker', '1.16.1'
   gem 'database_cleaner', '1.0.1'
 end
+
+gem 'backbone-rails', '1.0.0'
