@@ -71,9 +71,10 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     },
 
     updateOrderData: function() {
-      model = new SpreeStore.Models.Order({ id: SpreeStore.current_order_id })
-      console.log(this.$('#update-cart').serialize())
+      model = new SpreeStore.Models.Order({ number: SpreeStore.current_order_id })
       $.ajax({
+        // Need to wait for this request to complete before order can go to cart.
+        async: false,
         method: 'PUT',
         url: model.url(),
         data: this.$('#update-cart').serialize(),
@@ -98,9 +99,13 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
       $.ajax({
         method: 'PUT',
         data: { order_token: SpreeStore.current_order_token },
-        url: '/store/api/checkouts/' + model.id + '/next',
+        url: '/store/api/checkouts/' + model.attributes.number + '/next',
         success: function(data) {
           SpreeStore.navigate("/checkout", true)
+        },
+        error: function(xhr) {
+          console.log(xhr.responseText)
+          alert("FAILURE")
         }
       })
     },

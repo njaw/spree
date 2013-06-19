@@ -9,6 +9,7 @@
 <% end %>
 
 <% content_for :templates do %>
+  <%= render "spree/templates/shared/errors" %>
   <%= render "spree/templates/products/index" %>
   <%= render "spree/templates/taxonomies/item" %>
   <%= render "spree/templates/products/preview" %>
@@ -18,6 +19,7 @@
   <%= render "spree/templates/line_items/show" %>
   <%= render "spree/templates/line_items/index" %>
   <%= render "spree/templates/order/address" %>
+  <%= render "spree/templates/order/delivery" %>
 <% end %>
 
 <script>
@@ -28,5 +30,5 @@
       $('#link-to-cart').html("<a href='#'><%= Spree.t(:cart) %>: <%= Spree.t(:empty) %></a>")
     }
     SpreeStore.start();
-  })
+  })  
 </script>

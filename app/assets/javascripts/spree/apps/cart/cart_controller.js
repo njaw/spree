@@ -70,7 +70,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
 
     preview: function() {
       if (SpreeStore.current_order_id) {
-        model = new SpreeStore.Models.Order({ id: SpreeStore.current_order_id })
+        model = new SpreeStore.Models.Order({ number: SpreeStore.current_order_id })
         model.fetch({ 
           data: $.param({ order_token: SpreeStore.current_order_token}),
           success: function(data) {

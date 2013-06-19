@@ -11,12 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130605225402) do
-
-  create_table "shipping_methods_zones", :id => false, :force => true do |t|
-    t.integer "shipping_method_id"
-    t.integer "zone_id"
-  end
+ActiveRecord::Schema.define(:version => 20130619012448) do
 
   create_table "spree_activators", :force => true do |t|
     t.string   "description"
@@ -107,12 +102,13 @@ ActiveRecord::Schema.define(:version => 20130605225402) do
   add_index "spree_configurations", ["name", "type"], :name => "index_spree_configurations_on_name_and_type"
 
   create_table "spree_countries", :force => true do |t|
-    t.string  "iso_name"
-    t.string  "iso"
-    t.string  "iso3"
-    t.string  "name"
-    t.integer "numcode"
-    t.boolean "states_required", :default => true
+    t.string   "iso_name"
+    t.string   "iso"
+    t.string   "iso3"
+    t.string   "name"
+    t.integer  "numcode"
+    t.boolean  "states_required", :default => true
+    t.datetime "updated_at"
   end
 
   create_table "spree_credit_cards", :force => true do |t|
@@ -241,6 +237,7 @@ ActiveRecord::Schema.define(:version => 20130605225402) do
   end
 
   add_index "spree_orders", ["number"], :name => "index_spree_orders_on_number"
+  add_index "spree_orders", ["user_id"], :name => "index_spree_orders_on_user_id"
 
   create_table "spree_payment_methods", :force => true do |t|
     t.string   "type"
@@ -454,6 +451,11 @@ ActiveRecord::Schema.define(:version => 20130605225402) do
     t.string   "tracking_url"
   end
 
+  create_table "spree_shipping_methods_zones", :id => false, :force => true do |t|
+    t.integer "shipping_method_id"
+    t.integer "zone_id"
+  end
+
   create_table "spree_shipping_rates", :force => true do |t|
     t.integer  "shipment_id"
     t.integer  "shipping_method_id"
@@ -477,9 +479,10 @@ ActiveRecord::Schema.define(:version => 20130605225402) do
   end
 
   create_table "spree_states", :force => true do |t|
-    t.string  "name"
-    t.string  "abbr"
-    t.integer "country_id"
+    t.string   "name"
+    t.string   "abbr"
+    t.integer  "country_id"
+    t.datetime "updated_at"
   end
 
   create_table "spree_stock_items", :force => true do |t|

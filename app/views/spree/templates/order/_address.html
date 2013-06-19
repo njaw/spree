@@ -17,6 +17,8 @@
   <div class="row" data-hook="checkout_content">
     <div class="columns alpha twelve" data-hook="checkout_form_wrapper">
       <form accept-charset="UTF-8" action="/store/checkout/update/address" class="edit_order" id="checkout_form_address" method="post">
+        <div id="errorExplanation" class="errorExplanation" data-hook="" style='display:none'>
+        </div>
         <div class="columns alpha six" data-hook="billing_fieldset_wrapper">
           <fieldset id="billing" data-hook="">
             <legend align="center">Billing Address</legend>
@@ -50,6 +52,10 @@
 
                 <p class="field" id="bstate">
                   <label for="order_bill_address_attributes_state">State</label><span class="required" id="bstate-required">*</span><br>
+                  <span id="bcountry-selection">
+                    <select class="required states" id="order_bill_address_attributes_state_id" name="order[bill_address_attributes][state_id]"></select>
+                    <input class="required state_name" name="order[bill_address_attributes][state_name]" style="display:none">
+                  </span>
                 </p>
 
               <p class="field" id="bzipcode">
@@ -69,7 +75,7 @@
             
             <legend align="center">Shipping Address</legend>
             <p class="field checkbox" data-hook="use_billing">
-              <input checked="checked" id="order_use_billing" name="order[use_billing]" type="checkbox" value="1">
+              <input id="order_use_billing" name="order[use_billing]" type="checkbox" value="1">
               <label for="order_use_billing" id="use_billing">Use Billing Address</label>
             </p>
             <div class="inner" data-hook="shipping_inner">
@@ -120,7 +126,7 @@
           <input class="continue button primary" name="commit" type="submit" value="Save and Continue">
         </div>
 
-      </form>    
+      </form>   
     </div>    
     <div id="checkout-summary" data-hook="checkout_summary_box" class="columns omega four">
       <h3>Order Summary</h3>
@@ -147,4 +153,7 @@
     </div>
   </div>
 </div>
+<script>
+$('.edit_order').validate()
+</script>
 </script>

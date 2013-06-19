@@ -13,12 +13,18 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.simplePagination
+//= require jquery.validate
 //= require underscore
 //= require underscore_mixins
+//= require underscore.string
 //= require backbone
 //= require backbone.marionette
+//= require backbone.syphon
 //= require backbone-rails
 //= require spree/application
+
+// For underscore.string
+_.mixin(_.string.exports())
 
 $(document).ajaxSend(function(e, xhr, options) {
   xhr.setRequestHeader("X-SPREE-TOKEN", Spree.api_key);
