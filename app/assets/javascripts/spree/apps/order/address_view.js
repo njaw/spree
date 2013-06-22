@@ -12,9 +12,7 @@ SpreeStore.module('Order',function(Order, SpreeStore, Backbone,Marionette,$,_){
       // TODO: I didn't do this with a Backbone.Collection because it was too hard.
       // Seriously.
       $.get('/store/api/countries', { per_page: 1000 }, function(data) {
-        console.log(data)
          _.each(data.countries, function(country) {
-          console.log("appending " + country.name)
           option_tag = "<option value='" + country.id + "'>" + country.name + "</option>"
           $('#bcountry select').append(option_tag)  
           $('#scountry select').append(option_tag)  
