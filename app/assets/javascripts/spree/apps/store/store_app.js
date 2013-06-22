@@ -5,7 +5,8 @@ SpreeStore.module('StoreApp',function(StoreApp, SpreeStore, Backbone,Marionette,
       "products/:id": "showProduct",
       "products/page/:number": "listProducts",
       "cart": "previewCart",
-      "checkout": "checkout"
+      "checkout": "checkout",
+      "checkout/:state": "checkout"
     }
   });
 
