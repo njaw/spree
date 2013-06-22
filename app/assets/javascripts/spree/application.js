@@ -14,21 +14,11 @@ SpreeStore.current_order_id = window.localStorage['current_order_id']
 SpreeStore.current_order_token = window.localStorage['current_order_token']
 
 SpreeStore.MainRegion = Backbone.Marionette.Region.extend({
-  el: '.fast-freddy',
-  // open: function(view){
-  //   this.$el.hide();
-  //   this.$el.html(view.el);
-  //   this.$el.delay(750).fadeIn(2000);
-  // }
+  el: '.fast-freddy'
 });
 
 SpreeStore.Sidebar = Backbone.Marionette.Region.extend({
-  el: '#sidebar',
-  open: function(view){
-    this.$el.hide();
-    this.$el.html(view.el);
-    this.$el.delay(500).fadeIn(2000);
-  }
+  el: '#sidebar'
 });
 
 SpreeStore.addRegions({
