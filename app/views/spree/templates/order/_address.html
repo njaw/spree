@@ -128,29 +128,7 @@
 
       </form>   
     </div>    
-    <div id="checkout-summary" data-hook="checkout_summary_box" class="columns omega four">
-      <h3>Order Summary</h3>
-      <table data-hook="order_summary">
-        <tbody>
-          <%% _.each(line_items, function(line_item) { %>
-            <tr>
-              <td><%%= line_item.quantity %> x <%%= line_item.variant.name %></td>
-              <td><%%= line_item.display_amount %></td>
-            </tr>
-          <%% }) %>
-          <tr data-hook="item_total">
-            <td><strong>Item Total:</strong></td>
-            <td><strong><%%= Spree.Money.format(item_total) %></strong></td>
-          </tr>
-          </tbody><tbody id="summary-order-charges" data-hook="">
-          </tbody>
-          <tbody><tr data-hook="order_total">
-            <td><strong>Order Total:</strong></td>
-            <td><strong><span id="summary-order-total"><%%= Spree.Money.format(total) %></span></strong></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <%= render "spree/templates/order/summary" %>
   </div>
 </div>
 <script>
