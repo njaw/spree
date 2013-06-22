@@ -78,9 +78,12 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
               model: data,
               collection: new SpreeStore.Models.LineItems(data.attributes.line_items)
             })
-
-            SpreeStore.mainRegion.show(cart_view)
-            SpreeStore.noSidebar()
+            if (data.attributes.state != 'cart') {
+              SpreeStore.navigate("/checkout/" + data.attributes.state, true)
+            } else {
+              SpreeStore.mainRegion.show(cart_view)
+              SpreeStore.noSidebar()
+            }
           }
         });
       } else {
