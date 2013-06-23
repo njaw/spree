@@ -70,7 +70,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
       "click #checkout-link": "beginCheckout"
     },
 
-    updateOrderData: function() {
+    updateOrderData: function(options) {
       model = new SpreeStore.Models.Order({ number: SpreeStore.current_order_id })
       $.ajax({
         // Need to wait for this request to complete before order can go to cart.
@@ -83,6 +83,20 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
           Cart.Controller.updateCart(data)
         }
       })
+      if (options && options.next) {
+        $.ajax({
+          method: 'PUT',
+          data: { order_token: SpreeStore.current_order_token },
+          url: '/store/api/checkouts/' + model.attributes.number + '/next',
+          success: function(data) {
+            SpreeStore.navigate("/checkout", true)
+          },
+          error: function(xhr) {
+            console.log(xhr.responseText)
+            alert("FAILURE")
+          }
+        })
+      }
       return model;
     },
 
@@ -95,19 +109,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     beginCheckout: function(e) {
       e.stopPropagation();
       e.preventDefault();
-      var model = this.updateOrderData()
-      $.ajax({
-        method: 'PUT',
-        data: { order_token: SpreeStore.current_order_token },
-        url: '/store/api/checkouts/' + model.attributes.number + '/next',
-        success: function(data) {
-          SpreeStore.navigate("/checkout", true)
-        },
-        error: function(xhr) {
-          console.log(xhr.responseText)
-          alert("FAILURE")
-        }
-      })
+      this.updateOrderData({ next: true })
     },
 
 
