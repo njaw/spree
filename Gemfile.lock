@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/radar/spree.git
-  revision: 2c3480bb5a7a25c0a42fef45ce2899499698bffc
+  revision: f740ee648fb22a64b49ab2c240e0aa542a6ff580
   branch: master
   specs:
     spree (2.1.0.beta)
