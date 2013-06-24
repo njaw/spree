@@ -3,8 +3,8 @@
   <div data-hook="outside_cart_form">
     <form accept-charset="UTF-8" action="#cart" class="edit_order" id="update-cart" method="post">
       <p>
-        <label for='order_email'><%= Spree.t(:email) %></label><br>
-        <input type='text' name='order[email]' id='order_email' value="<%%= email %>">
+        <label for='order_email'><%= Spree.t(:email) %><span class="required">*</span></label><br>
+        <input type='text' name='order[email]' id='order_email' value="<%%= email %>" class='required'>
       </p>
       <div data-hook="inside_cart_form">
         <div data-hook="cart_items">
@@ -44,6 +44,9 @@
     </p>
   </div>
   </form>
+  <script>
+    $('.edit_order').validate()
+  </script>
 </script>
 
 <script type='text/template' id='empty-cart-template'>

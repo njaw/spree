@@ -72,44 +72,49 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
 
     updateOrderData: function(options) {
       model = new SpreeStore.Models.Order({ number: SpreeStore.current_order_id })
+      // Next is only passed as an option when checkout button is pressed
+      // It is only in this event do we want the next event to be triggered,
+      // which is what happens in CheckoutsController's API.
+      //
+      // When updating through the Orders API, the next method is not called.
+      // This makes the Orders API ideal for the "Update" button.
+      if (options && options.next) {
+        var url = '/store/api/checkouts/' + model.attributes.number
+      } else {
+        var url = model.url();
+      }
+
+      data = this.$('#update-cart').serialize()
+      data.order_token = SpreeStore.current_order_token
       $.ajax({
-        // Need to wait for this request to complete before order can go to cart.
-        async: false,
         method: 'PUT',
-        url: model.url(),
-        data: this.$('#update-cart').serialize(),
+        url: url,
+        data: data,
         success: function(data) {
           Cart.Controller.showCartInfo()
           Cart.Controller.updateCart(data)
+          if (data.state != 'cart') {
+            SpreeStore.navigate("/checkout", true)
+          }
+        },
+        error: function(xhr) {
+          console.log(xhr.responseText)
+          alert("FAILURE")
         }
       })
-      if (options && options.next) {
-        $.ajax({
-          method: 'PUT',
-          data: { order_token: SpreeStore.current_order_token },
-          url: '/store/api/checkouts/' + model.attributes.number + '/next',
-          success: function(data) {
-            SpreeStore.navigate("/checkout", true)
-          },
-          error: function(xhr) {
-            console.log(xhr.responseText)
-            alert("FAILURE")
-          }
-        })
-      }
       return model;
     },
 
     updateOrder: function(e) {
       e.stopPropagation();
       e.preventDefault();
-      this.updateOrderData()
+      this.updateOrderData();
     },
 
     beginCheckout: function(e) {
       e.stopPropagation();
       e.preventDefault();
-      this.updateOrderData({ next: true })
+      this.updateOrderData({ next: true});
     },
 
 

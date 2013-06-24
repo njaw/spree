@@ -32,8 +32,9 @@ SpreeStore.module('StoreApp',function(StoreApp, SpreeStore, Backbone,Marionette,
       SpreeStore.Cart.Controller.preview();
     },
 
-    checkout: function() {
-      SpreeStore.Order.Controller.show();
+    checkout: function(state) {
+      console.log(state)
+      SpreeStore.Order.Controller.show(state);
     }
   }
 

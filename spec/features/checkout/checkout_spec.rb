@@ -2,9 +2,9 @@ require 'spec_helper'
 
 feature "Checkout", :js => true do
   before do
-    FactoryGirl.create(:product, :name => "iPad")
-    FactoryGirl.create(:country, :name => "Afghanistan")
+    reset_spree_preferences
     country = FactoryGirl.create(:country, :name => "Australia")
+    FactoryGirl.create(:base_product, :name => "iPad")
     country.states.create!(:name => "Victoria")
   end
 
@@ -17,6 +17,8 @@ feature "Checkout", :js => true do
       fill_in "City", :with => "Nowhere"
       binding.pry
       select "Australia", :from => "Country"
+      select "Victoria", :from => "State"
+      binding.pry
     end
   end
 
@@ -30,4 +32,8 @@ feature "Checkout", :js => true do
     fill_in_address_for("bill")
     binding.pry
   end
+
+  it "can jump back to a previous state"
+
+  it "cannot navigate to an invalid state"
 end

@@ -4,12 +4,21 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'spree/testing_support/factories'
+require 'spree/testing_support/preferences'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
+ActiveSupport::Notifications.subscribe("sql.active_record") do |_, _, _, _, details|
+  if details[:sql] =~ /INSERT INTO "spree_countries"/
+    puts caller.join("\n")
+    puts "*" * 50
+  end
+end
+
 RSpec.configure do |config|
+  config.include Spree::TestingSupport::Preferences
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
 
