@@ -22,13 +22,3 @@
   <%= render "spree/templates/order/delivery" %>
 <% end %>
 
-<script>
-  $(document).ready(function() {
-    if (SpreeStore.current_order_id) {
-      $('#link-to-cart').html("<a href='#'><%= Spree.t(:cart) %>: <img src='/assets/loading.gif'></a>")
-    } else {
-      $('#link-to-cart').html("<a href='#'><%= Spree.t(:cart) %>: <%= Spree.t(:empty) %></a>")
-    }
-    SpreeStore.start();
-  })  
-</script>

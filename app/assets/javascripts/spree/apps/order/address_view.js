@@ -12,13 +12,16 @@ SpreeStore.module('Order',function(Order, SpreeStore, Backbone,Marionette,$,_){
       // TODO: I didn't do this with a Backbone.Collection because it was too hard.
       // Seriously.
       $.get('/store/api/countries', { per_page: 1000 }, function(data) {
-         _.each(data.countries, function(country) {
+        _.each(data.countries, function(country) {
           option_tag = "<option value='" + country.id + "'>" + country.name + "</option>"
-          $('#bcountry select').append(option_tag)  
-          $('#scountry select').append(option_tag)  
-          $('#bcountry select').val(Spree.Settings.default_country_id).change();
+          $('#bcountry select').append(option_tag)
+          $('#scountry select').append(option_tag)
         })
       })
+      if (Spree.Settings.default_country_id) {
+        $('#bcountry select').val(Spree.Settings.default_country_id)
+      }
+      $('#bcountry select').trigger('change')
     },
 
     useBilling: function(e) {
@@ -33,9 +36,18 @@ SpreeStore.module('Order',function(Order, SpreeStore, Backbone,Marionette,$,_){
     },
 
     updateStates: function(e) {
-      $.get('/store/api/states', { country_id: e.target.value, per_page: 100 },
-        function(data) {
-          var fieldset = $(e.target).parents("fieldset")
+      var target = $(e.target);
+      // When the page is first loaded, no country is selected.
+      // Therefore, default to populating first country's states.
+      var country_id = target.val()
+      if (country_id == null) {
+        country_id = target.find("option").attr('value')
+      }
+      $.ajax({
+        url: '/store/api/states', 
+        data: { country_id: country_id, per_page: 100 },
+        success: function(data) {
+          var fieldset = target.parents("fieldset")
           var states_select = fieldset.find(".states")
           var states_input = fieldset.find("input.state_name")
           if (data.states.length > 0) {
@@ -49,8 +61,11 @@ SpreeStore.module('Order',function(Order, SpreeStore, Backbone,Marionette,$,_){
             states_input.show();
             states_select.hide();
           }
+        },
+        error: function(xhr) {
+          console.log(xhr.responseText)
         }
-      )
+      })
     },
 
     updateOrder: function(e) {
@@ -58,7 +73,6 @@ SpreeStore.module('Order',function(Order, SpreeStore, Backbone,Marionette,$,_){
       // jQuery is easier, again.
       var data = Backbone.Syphon.serialize(this)
       data['order_token'] = SpreeStore.current_order_token
-      console.log(this.model.attributes.number)
       $.ajax({
         type: 'PUT',
         dataType: 'json',

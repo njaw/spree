@@ -2,11 +2,16 @@ require 'spec_helper'
 
 feature "Checkout", :js => true do
   before do
+    binding.pry
     reset_spree_preferences
-    country = FactoryGirl.create(:country, :name => "Australia")
+    # So the config endpoint has something to load when determining
+    # if it should cache its response or not
+    Spree::Config[:currency] = "USD"
     FactoryGirl.create(:base_product, :name => "iPad")
-    country.states.create!(:name => "Victoria")
   end
+
+  let!(:country) { Spree::Country.first }
+  let!(:state) { country.states.first }
 
   def fill_in_address_for(type)
     field_prefix = "order_#{type}_address_attributes"
@@ -15,10 +20,9 @@ feature "Checkout", :js => true do
       fill_in "Last Name", :with => "Bigg"
       fill_in "Street Address", :with => "1 Nowhere Lane"
       fill_in "City", :with => "Nowhere"
+      select country.name, :from => "Country"
       binding.pry
-      select "Australia", :from => "Country"
-      select "Victoria", :from => "State"
-      binding.pry
+      select state.name, :from => "State"
     end
   end
 

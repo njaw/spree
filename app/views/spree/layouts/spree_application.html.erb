@@ -36,5 +36,15 @@
     <script>
       Spree.api_key = <%= raw(try_spree_current_user.try(:spree_api_key).to_s.inspect) %>;
     </script>
+    <script>
+    $(document).ready(function() {
+      if (SpreeStore.current_order_id) {
+        $('#link-to-cart').html("<a href='#'><%= Spree.t(:cart) %>: <img src='/assets/loading.gif'></a>")
+      } else {
+        $('#link-to-cart').html("<a href='#'><%= Spree.t(:cart) %>: <%= Spree.t(:empty) %></a>")
+      }
+      SpreeStore.start();
+    })  
+    </script>
   </body>
 </html>
