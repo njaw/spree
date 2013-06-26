@@ -12,6 +12,7 @@ SpreeStore.module('Order',function(Order, SpreeStore, Backbone,Marionette,$,_){
       // TODO: I didn't do this with a Backbone.Collection because it was too hard.
       // Seriously.
       $.get('/store/api/countries', { per_page: 1000 }, function(data) {
+        $('#bcountry select').html('')
         _.each(data.countries, function(country) {
           option_tag = "<option value='" + country.id + "'>" + country.name + "</option>"
           $('#bcountry select').append(option_tag)
@@ -51,6 +52,7 @@ SpreeStore.module('Order',function(Order, SpreeStore, Backbone,Marionette,$,_){
           var states_select = fieldset.find(".states")
           var states_input = fieldset.find("input.state_name")
           if (data.states.length > 0) {
+            states_select.html('')
             _.each(data.states, function(state) {
               option_tag = "<option value='" + state.id + "'>" + state.name + "</option>"
               states_select.append(option_tag)

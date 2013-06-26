@@ -63,8 +63,7 @@
                   <%% _.each(shipment.shipping_rates, function(shipping_rate) { %>
                     <li class="shipping-method">
                       <label>
-                        <input checked="checked" name="order[shipments_attributes][<%%= shipment.id %>][selected_shipping_rate_id]" type="radio" value="1">
-                        <%% console.log(shipping_rate) %>
+                        <input name="order[shipments_attributes][<%%= shipment.id %>][selected_shipping_rate_id]" type="radio" value="1">
                         <span class="rate-name"><%%= shipping_rate.name %></span>
                         <span class="rate-cost"><%%= shipping_rate.display_cost %></span>
                       </label>
