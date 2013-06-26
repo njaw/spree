@@ -10,12 +10,12 @@ require 'spree/testing_support/preferences'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
-ActiveSupport::Notifications.subscribe("sql.active_record") do |_, _, _, _, details|
-  if details[:sql] =~ /INSERT INTO "spree_countries"/
-    puts caller.join("\n")
-    puts "*" * 50
-  end
-end
+# ActiveSupport::Notifications.subscribe("sql.active_record") do |_, _, _, _, details|
+#   if details[:sql] =~ /INSERT INTO "spree_states"/
+#     puts caller.join("\n")
+#     puts "*" * 50
+#   end
+# end
 
 RSpec.configure do |config|
   config.include Spree::TestingSupport::Preferences
