@@ -24,7 +24,7 @@ feature "Cart", :js => true do
 
   it "navigating to an empty cart does not fail" do
     visit "/#cart"
-    page.should have_content("Your cart is empty.")
+    page.should have_content("Your cart is empty")
   end
 
 end
