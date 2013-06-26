@@ -1,7 +1,7 @@
 <script type="text/template" id="product-preview-template">
     <li id="product_<%%= id %>" class="columns three alpha" itemscope itemtype="http://schema.org/Product">
     <div class="product-image">
-      <img src='<%%= displayImage('small') %>'>
+      <img src='<%%= displayImage(variants[0], 'small') %>'>
     </div>
     <a class='info' itemprop='name' title='<%%= name %>' href='#'><%%= name %></a>
     <span class="price selling" itemprop="price"><%%= display_price %></span>

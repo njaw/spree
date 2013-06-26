@@ -1,7 +1,7 @@
 <script type='text/template' id='line-item-template'>
   <td class="cart-item-image" data-hook="cart_item_image">
     <a href='#'>
-      <img alt="<%%= variant.name %>" src="<%%= displayImage('small') %>" data-product-permalink='<%%= permalink() %>'>
+      <img alt="<%%= variant.name %>" src="<%%= displayImage(variant, 'small') %>" data-product-permalink='<%%= permalink() %>'>
     </a>
   </td>
   <td class="cart-item-description" data-hook="cart_item_description">

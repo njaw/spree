@@ -50,7 +50,7 @@
                     <%% _.each(shipment.manifest, function(manifest) { %>
                       <%% var variant = manifest.variant %>
                       <tr class="stock-item">
-                        <td class="item-image"><img alt="<%%= variant.name %>" src="<%%= variant.images[0].mini_url %>"></td>
+                        <td class="item-image"><img alt="<%%= variant.name %>" src="<%%= displayImage(variant, 'mini') %>"></td>
                         <td class="item-name"><%%= variant.name %></td>
                         <td class="item-qty"><%%= manifest.quantity %></td>
                         <td class="item-price"><%%= Spree.Money.format(variant.price) %></td>

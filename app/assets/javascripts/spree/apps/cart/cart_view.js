@@ -26,13 +26,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     },
 
     templateHelpers: {
-      displayImage: function(type) {
-        if (this.variant.images[0]) {
-          return this.variant.images[0][type + '_url'];
-        } else {
-          return "/assets/noimage/" + type + ".png";
-        }
-      },
+      displayImage: SpreeStore.helpers.displayImage,
       permalink: function() {
         return this.variant.permalink
       }

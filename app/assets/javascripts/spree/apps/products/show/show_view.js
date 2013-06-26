@@ -16,13 +16,7 @@ SpreeStore.module('Products.Show',function(Show, SpreeStore, Backbone,Marionette
     },
 
     templateHelpers: {
-      displayImage: function(type) {
-        if (this.variants[0].images[0]) {
-          return this.variants[0].images[0][type + '_url'];
-        } else {
-          return "/assets/noimage/" + type + ".png";
-        }
-      },
+      displayImage: SpreeStore.helpers.displayImage,
       
       thumbnails: function() {
         return _.flatten(_.map(this.variants, function(variant) {
