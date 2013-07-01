@@ -60,20 +60,26 @@
                 </table>
                 <h5 class="stock-shipping-method-title">Shipping Method</h5>
                 <ul class="field radios shipping-methods">
-                  <%% _.each(shipment.shipping_rates, function(shipping_rate) { %>
+                  <%% _.each(shipment.shipping_rates, function(shipping_rate, sr_index) { %>
                     <li class="shipping-method">
                       <label>
-                        <input name="order[shipments_attributes][<%%= shipment.id %>][selected_shipping_rate_id]" type="radio" value="1">
+                        <input name="order[shipments_attributes][<%%= sr_index %>][id]" type="hidden" value="<%%= shipment.id %>">
+                        <input name="order[shipments_attributes][<%%= sr_index %>][selected_shipping_rate_id]" type="radio" value="<%%= shipping_rate.id %>">
                         <span class="rate-name"><%%= shipping_rate.name %></span>
                         <span class="rate-cost"><%%= shipping_rate.display_cost %></span>
                       </label>
                     </li>
                   <%% }) %>
+                  <div class="validation-error" style='display:none'><%= Spree.t(:please_select_a_shipping_rate) %></div>
                 </ul>
               <%% }) %>
             </div>
           </div>
         </fieldset>
+        <br>
+        <div class="form-buttons" data-hook="buttons">
+          <input class="continue button primary" name="commit" type="submit" value="Save and Continue">
+        </div>
       </form>
     </div>
     <%= render "spree/templates/order/summary" %>

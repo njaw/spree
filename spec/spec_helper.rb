@@ -22,8 +22,10 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
 
+
   config.before(:each) do
     if example.metadata[:js]
+      page.driver.execute_script("window.localStorage.clear()")
       DatabaseCleaner.strategy = :truncation
     else
       DatabaseCleaner.strategy = :transaction

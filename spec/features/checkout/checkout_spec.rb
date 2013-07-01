@@ -30,7 +30,7 @@ feature "Checkout", :js => true do
     end
   end
 
-  it "can add a product to the cart" do
+  def walkthrough_to_address
     visit "/"
     click_link "iPad"
     fill_in "quantity", :with => 2
@@ -39,6 +39,10 @@ feature "Checkout", :js => true do
     click_button 'Checkout'
     sleep(0.5)
     page.current_url.should include("checkout/address")
+  end
+
+  it "can walk through the entire cart" do
+    walkthrough_to_address
     fill_in_address_for("bill")
     check "Use Billing Address"
     click_button "Save and Continue"
@@ -47,6 +51,26 @@ feature "Checkout", :js => true do
     choose shipping_method.name
     click_button "Save and Continue"
     page.current_url.should include("checkout/payment")
+  end
+
+  it "is politely asked to select a shipping rate" do
+    walkthrough_to_address
+    fill_in_address_for("bill")
+    check "Use Billing Address"
+    click_button "Save and Continue"
+    sleep(0.5)
+    page.current_url.should include("checkout/delivery")
+    within(".shipping-methods") do
+      page.should_not have_content("Please select a shipping rate.")
+    end
+    click_button "Save and Continue"
+    within(".shipping-methods") do
+      page.should have_content("Please select a shipping rate.")
+    end
+    choose shipping_method.name
+    within(".shipping-methods") do
+      page.should_not have_content("Please select a shipping rate.")
+    end
   end
 
   it "can jump back to a previous state"
