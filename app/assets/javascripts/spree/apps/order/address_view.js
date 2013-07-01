@@ -65,6 +65,8 @@ SpreeStore.module('Order',function(Order, SpreeStore, Backbone,Marionette,$,_){
           }
         },
         error: function(xhr) {
+          // TODO: It would be a good idea to handle errors here for when this action fails.
+          // Not that I've ever seen it fail...
           console.log(xhr.responseText)
         }
       })
