@@ -1,0 +1,56 @@
+<script type='text/template' id='order-payment-template'>
+  <div id="checkout" data-hook="">  
+  
+  
+    <div class="row" data-hook="checkout_header">
+      <h1 class="columns three alpha" data-hook="checkout_title">Checkout</h1>
+      <div class="columns thirteen omega" data-hook="checkout_progress">
+        <ol class="progress-steps" id="checkout-step-payment">
+          <li class="completed-first"><span><a href="/#checkout/address">Address</a></span></li>
+          <li class="completed"><span><a href="/#checkout/delivery">Delivery</a></span></li>
+          <li class="current"><span>Payment</span></li>
+          <li class="last"><span>Complete</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <form class="edit_order columns alpha twelve">
+      <div class="row" data-hook="checkout_content">
+        <div data-hook="checkout_form_wrapper">
+          <fieldset id="payment" data-hook>
+            <legend align="center"><%= Spree.t(:payment_information) %></legend>
+            <div data-hook="checkout_payment_step">
+              <%% _.each(payment_methods, function(method) { %>
+                <p>
+                  <label>
+                  <input checked="checked" id="order_payments_attributes__payment_method_id_<%%= method.id %>" name="order[payments_attributes][][payment_method_id]" type="radio" value="<%%= method.id %>">
+                    <%%= method.name %>
+                  </label>
+                </p>
+              <%% }) %>
+
+              <ul id="payment-methods" data-hook>
+              </ul>
+              <br style="clear:both;" />
+              <% if Spree::Promotion.with_code.count > 0 %>
+                <p class='field' data-hook='coupon_code'>
+                  <%= form.label :coupon_code %><br />
+                  <%= form.text_field :coupon_code %>
+                </p>
+              <% end %>
+            </div>
+          </fieldset>
+
+          <br class="space" />
+
+          <div class="form-buttons" data-hook="buttons">
+            <input class="continue button primary" name="commit" type="submit" value="Save and Continue">
+            <span id='loading' style='display:none'><%= image_tag "loading.gif" %></span>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <%= render "spree/templates/order/summary" %>
+  </div>
+</script>
