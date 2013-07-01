@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.13'
 gem 'sqlite3'
 
-gem 'jquery-rails', '2.2.1'
+gem 'jquery-rails'
 
 gem 'spree', :github => 'radar/spree', :branch => "master"
 gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => "master"
