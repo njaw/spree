@@ -1,0 +1,150 @@
+<script type='text/template' id='order-template'>
+<fieldset id="order_summary" data-hook="">
+  <legend align="center"><%= t(:order) %> <%%= number %></legend>
+  <h1><%= t(:order) %> <%%= number %></h1>
+
+  <div id="order" data-hook="">
+    <div class="row steps-data">
+
+    <div class="columns alpha four" data-hook="order-ship-address">
+      <h6><%= t(:shipping_address) %></h6>
+      <div class="address vcard">
+        <div class="fn"><%%= ship_address.full_name %></div>
+        <div class="adr">
+          <div class="street-address">
+            <div class="street-address-line">
+              <%%= ship_address.address1 %>
+            </div>
+            <div class="street-address-line">
+              <%%= ship_address.address2 %>
+            </div>
+          </div>
+          <div class="local">
+            <span class="locality"><%%= ship_address.city %></span>
+            <span class="region"><%%= ship_address.state.name %></span>
+            <span class="postal-code"><%%= ship_address.zipcode %></span>
+            <div class="country-name"><%%= ship_address.country.name %></div>
+          </div>
+        </div>
+        <div class="tel">
+          <span class="type">Phone</span>
+          <%%= ship_address.phone %>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns alpha four" data-hook="order-bill-address">
+      <h6><%= t(:billing_address) %></h6>
+      <div class="address vcard">
+        <div class="fn"><%%= bill_address.full_name %></div>
+        <div class="adr">
+          <div class="street-address">
+            <div class="street-address-line">
+              <%%= bill_address.address1 %>
+            </div>
+            <div class="street-address-line">
+              <%%= bill_address.address2 %>
+            </div>
+          </div>
+          <div class="local">
+            <span class="locality"><%%= bill_address.city %></span>
+            <span class="region"><%%= bill_address.state.name %></span>
+            <span class="postal-code"><%%= bill_address.zipcode %></span>
+            <div class="country-name"><%%= bill_address.country.name %></div>
+          </div>
+        </div>
+        <div class="tel">
+          <span class="type">Phone</span>
+          <%%= bill_address.phone %>
+        </div>
+      </div>
+    </div>
+
+      <div class="columns alpha four">
+        <h6><%= t(:shipments) %></h6>
+        <div class="delivery">
+          <%% _.each(shipments, function(shipment) { %>
+            <%%= shipment.selected_shipping_rate.name %> <%%= shipment.selected_shipping_rate.display_cost %>
+            <br>
+          <%% }) %>
+        </div>
+        
+      </div>
+
+  <div class="columns omega four">
+    <h6><%= t(:payment_information) %></h6>
+    <div class="payment-info">
+      <%% _.each(payments, function(payment) { %>
+        <span><%%= payment.payment_method.name %> (<%%= payment.display_amount %>)</span><br>
+      <%% }) %>
+    </div>
+  </div>
+
+</div>
+
+<hr>
+
+<table id="line-items" class="index columns alpha omega sixteen" data-hook="order_details">
+  <colgroup><col width="15%" valign="middle" halign="center">
+  <col width="70%" valign="middle">
+  <col width="5%" valign="middle" halign="center">
+  <col width="5%" valign="middle" halign="center">
+  <col width="5%" valign="middle" halign="center">
+
+  </colgroup><thead data-hook="">
+    <tr data-hook="order_details_line_items_headers">
+      <th colspan="2">Item</th>
+      <th class="price">Price</th>
+      <th class="qty">Qty</th>
+      <th class="total"><span>Total</span></th>
+    </tr>
+  </thead>
+
+  <tbody data-hook="">
+      <tr data-hook="order_details_line_item_row">
+        <td data-hook="order_item_image">
+            <a href="/store/products/ruby-on-rails-baseball-jersey"><img alt="Ror_baseball_jersey_red" src="/spree/products/1/small/ror_baseball_jersey_red.png?1370651853"></a>
+        </td>
+        <td data-hook="order_item_description">
+          <h4>Ruby on Rails Baseball Jersey</h4>
+          Debitis fuga voluptates rem et. Minima aut quis praesentium sequi quos laborum. Quod ullam...
+          (Size: S, Color: Red)
+        </td>
+        <td data-hook="order_item_price" class="price"><span>$19.99</span></td>
+        <td data-hook="order_item_qty">1</td>
+        <td data-hook="order_item_total" class="total"><span>$19.99</span></td>
+      </tr>
+  </tbody>
+  <tfoot id="order-total" data-hook="order_details_total">
+    <tr class="total">
+      <td colspan="4"><b>Order Total:</b></td>
+      <td class="total"><span id="order_total">$30.99</span></td>
+    </tr>
+  </tfoot>
+  <tfoot id="subtotal" data-hook="order_details_subtotal">
+    <tr class="total" id="subtotal-row">
+      <td colspan="4"><b>Subtotal:</b></td>
+      <td class="total"><span>$19.99</span></td>
+    </tr>
+  </tfoot>
+  <tfoot id="order-charges" data-hook="order_details_adjustments">
+      <tr class="total">
+        <td colspan="4"><strong>Shipping</strong></td>
+        <td class="total"><span>$10.00</span></td>
+      </tr>
+      <tr class="total">
+        <td colspan="4"><strong>North America 5.0%</strong></td>
+        <td class="total"><span>$1.00</span></td>
+      </tr>
+  </tfoot>
+</table>
+
+
+    <br class="clear">
+
+    <p data-hook="links">
+      <a href="/store/" class="button">Go Back To Store</a>
+    </p>
+  </div>
+</fieldset>
+</script>
