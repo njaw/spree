@@ -25,7 +25,7 @@ SpreeStore.module('Order',function(Order, SpreeStore, Backbone,Marionette,$,_){
           data: data,
           success: function(data) {
             var order = new SpreeStore.Models.Order(data)
-            SpreeStore.Order.Controller.renderFor(order)
+            SpreeStore.Checkout.Controller.renderFor(order)
           },
         })
       }

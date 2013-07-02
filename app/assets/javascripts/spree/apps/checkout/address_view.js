@@ -1,5 +1,5 @@
-SpreeStore.module('Order',function(Order, SpreeStore, Backbone,Marionette,$,_){
-  Order.addressView = Backbone.Marionette.ItemView.extend({
+SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,$,_){
+  Checkout.addressView = Backbone.Marionette.ItemView.extend({
     template: '#order-address-template',
 
     events: {
@@ -84,7 +84,7 @@ SpreeStore.module('Order',function(Order, SpreeStore, Backbone,Marionette,$,_){
         data: data,
         success: function(data) {
           var order = new SpreeStore.Models.Order(data)
-          SpreeStore.Order.Controller.renderFor(order)
+          SpreeStore.Checkout.Controller.renderFor(order)
         },
         error: function(xhr) {
           var errors = JSON.parse(xhr.responseText).errors

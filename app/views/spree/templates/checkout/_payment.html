@@ -1,18 +1,7 @@
 <script type='text/template' id='order-payment-template'>
   <div id="checkout" data-hook="">  
   
-  
-    <div class="row" data-hook="checkout_header">
-      <h1 class="columns three alpha" data-hook="checkout_title">Checkout</h1>
-      <div class="columns thirteen omega" data-hook="checkout_progress">
-        <ol class="progress-steps" id="checkout-step-payment">
-          <li class="completed-first"><span><a href="/#checkout/address">Address</a></span></li>
-          <li class="completed"><span><a href="/#checkout/delivery">Delivery</a></span></li>
-          <li class="current"><span>Payment</span></li>
-          <li class="last"><span>Complete</span></li>
-        </ol>
-      </div>
-    </div>
+    <%= render "spree/templates/checkout/header" %>
 
     <form class="edit_order columns alpha twelve">
       <div class="row" data-hook="checkout_content">
@@ -23,14 +12,14 @@
               <%% _.each(payment_methods, function(method) { %>
                 <p>
                   <label>
-                  <input checked="checked" id="order_payments_attributes_0_payment_method_id_<%%= method.id %>" name="order[payments_attributes][0][payment_method_id]" type="radio" value="<%%= method.id %>">
+                  <input class="payment-method" id="payment-method-<%%= method.id %>" data-payment-method-type='<%%= method.method_type %>' name="order[payments_attributes][][payment_method_id]" type="radio" value="<%%= method.id %>">
                     <%%= method.name %>
                   </label>
                 </p>
               <%% }) %>
 
-              <ul id="payment-methods" data-hook>
-              </ul>
+              <span id="payment-method-info" data-hook>
+              </span>
               <br style="clear:both;" />
               <% if Spree::Promotion.with_code.count > 0 %>
                 <p class='field' data-hook='coupon_code'>
@@ -51,6 +40,6 @@
       </div>
     </form>
 
-    <%= render "spree/templates/order/summary" %>
+    <%= render "spree/templates/checkout/summary" %>
   </div>
 </script>

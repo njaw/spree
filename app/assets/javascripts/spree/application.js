@@ -3,7 +3,8 @@
 //= require_tree ../spree/models
 //= require_tree ../spree/apps/store
 //= require_tree ../spree/apps/cart
-//= require_tree ../spree/apps/order
+//= require_tree ../spree/apps/checkout
+//= require_tree ../spree/apps/orders
 //= require_tree ../spree/apps/taxonomies/list
 //= require_tree ../spree/apps/taxonomies/show
 //= require_tree ../spree/apps/products/list

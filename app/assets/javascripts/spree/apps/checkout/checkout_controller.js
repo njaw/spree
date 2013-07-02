@@ -1,12 +1,15 @@
-SpreeStore.module('Order',function(Order, SpreeStore, Backbone,Marionette,$,_){
-  Order.Controller = {
+SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,$,_){
+  Checkout.Controller = {
     show: function(state) {
       SpreeStore.noSidebar()
       order = new SpreeStore.Models.Order({ number: SpreeStore.current_order_id })
       order.fetch({
         data: $.param({ order_token: SpreeStore.current_order_token}),
         success: function(order) {
-          Order.Controller.renderFor(order, state)
+          Checkout.Controller.renderFor(order, state)
+          if (order.attributes.state == "complete") {
+            SpreeStore.navigate("/orders/" + order.attributes.number)
+          }
         }
       })
     },

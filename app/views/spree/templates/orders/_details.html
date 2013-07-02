@@ -1,4 +1,3 @@
-<script type='text/template' id='order-template'>
 <fieldset id="order_summary" data-hook="">
   <legend align="center"><%= t(:order) %> <%%= number %></legend>
   <h1><%= t(:order) %> <%%= number %></h1>
@@ -68,83 +67,73 @@
             <br>
           <%% }) %>
         </div>
-        
       </div>
 
-  <div class="columns omega four">
-    <h6><%= t(:payment_information) %></h6>
-    <div class="payment-info">
-      <%% _.each(payments, function(payment) { %>
-        <span><%%= payment.payment_method.name %> (<%%= payment.display_amount %>)</span><br>
-      <%% }) %>
+    <div class="columns omega four">
+      <h6><%= t(:payment_information) %></h6>
+      <div class="payment-info">
+        <%% _.each(payments, function(payment) { %>
+          <span><%%= payment.payment_method.name %> (<%%= payment.display_amount %>)</span><br>
+        <%% }) %>
+      </div>
     </div>
   </div>
 
-</div>
+  <hr>
 
-<hr>
+  <table id="line-items" class="index columns alpha omega sixteen" data-hook="order_details">
+    <colgroup><col width="15%" valign="middle" halign="center">
+    <col width="70%" valign="middle">
+    <col width="5%" valign="middle" halign="center">
+    <col width="5%" valign="middle" halign="center">
+    <col width="5%" valign="middle" halign="center">
 
-<table id="line-items" class="index columns alpha omega sixteen" data-hook="order_details">
-  <colgroup><col width="15%" valign="middle" halign="center">
-  <col width="70%" valign="middle">
-  <col width="5%" valign="middle" halign="center">
-  <col width="5%" valign="middle" halign="center">
-  <col width="5%" valign="middle" halign="center">
-
-  </colgroup><thead data-hook="">
-    <tr data-hook="order_details_line_items_headers">
-      <th colspan="2">Item</th>
-      <th class="price">Price</th>
-      <th class="qty">Qty</th>
-      <th class="total"><span>Total</span></th>
-    </tr>
-  </thead>
-
-  <tbody data-hook="">
-      <tr data-hook="order_details_line_item_row">
-        <td data-hook="order_item_image">
-            <a href="/store/products/ruby-on-rails-baseball-jersey"><img alt="Ror_baseball_jersey_red" src="/spree/products/1/small/ror_baseball_jersey_red.png?1370651853"></a>
-        </td>
-        <td data-hook="order_item_description">
-          <h4>Ruby on Rails Baseball Jersey</h4>
-          Debitis fuga voluptates rem et. Minima aut quis praesentium sequi quos laborum. Quod ullam...
-          (Size: S, Color: Red)
-        </td>
-        <td data-hook="order_item_price" class="price"><span>$19.99</span></td>
-        <td data-hook="order_item_qty">1</td>
-        <td data-hook="order_item_total" class="total"><span>$19.99</span></td>
+    </colgroup><thead data-hook="">
+      <tr data-hook="order_details_line_items_headers">
+        <th colspan="2"><%= t(:item) %></th>
+        <th class="price"><%= t(:price) %></th>
+        <th class="qty"><%= t(:qty) %></th> 
+        <th class="total"><span><%= t(:total) %></span></th>
       </tr>
-  </tbody>
-  <tfoot id="order-total" data-hook="order_details_total">
-    <tr class="total">
-      <td colspan="4"><b>Order Total:</b></td>
-      <td class="total"><span id="order_total">$30.99</span></td>
-    </tr>
-  </tfoot>
-  <tfoot id="subtotal" data-hook="order_details_subtotal">
-    <tr class="total" id="subtotal-row">
-      <td colspan="4"><b>Subtotal:</b></td>
-      <td class="total"><span>$19.99</span></td>
-    </tr>
-  </tfoot>
-  <tfoot id="order-charges" data-hook="order_details_adjustments">
+    </thead>
+
+    <tbody data-hook="">
+      <%% _.each(line_items, function(item) { %>
+        <tr data-hook="order_details_line_item_row">
+          <td data-hook="order_item_image">
+              <a href="#"><img src="<%%= displayImage(item.variant, 'small') %>"></a>
+          </td>
+          <td data-hook="order_item_description">
+            <h4><%%= item.variant.name %></h4>
+            <%%= item.variant.description %>
+            TODO: option values
+          </td>
+          <td data-hook="order_item_price" class="price"><span><%%= item.single_display_amount %></span></td>
+          <td data-hook="order_item_qty"><%%= item.quantity %></td>
+          <td data-hook="order_item_total" class="total"><span><%%= item.display_amount %></span></td>
+        </tr>
+      <%% }) %>
+        
+    </tbody>
+    <tfoot id="order-total" data-hook="order_details_total">
       <tr class="total">
-        <td colspan="4"><strong>Shipping</strong></td>
-        <td class="total"><span>$10.00</span></td>
+        <td colspan="4"><strong><%= t(:order_total) %>:</strong></td>
+        <td class="total"><span id="order_total"><%%= display_total %></span></td>
       </tr>
-      <tr class="total">
-        <td colspan="4"><strong>North America 5.0%</strong></td>
-        <td class="total"><span>$1.00</span></td>
+    </tfoot>
+    <tfoot id="subtotal" data-hook="order_details_subtotal">
+      <tr class="total" id="subtotal-row">
+        <td colspan="4"><b><%= t(:subtotal) %></b></td>
+        <td class="total"><span><%%= display_item_total %></span></td>
       </tr>
-  </tfoot>
-</table>
-
-
-    <br class="clear">
-
-    <p data-hook="links">
-      <a href="/store/" class="button">Go Back To Store</a>
-    </p>
-  </div>
+    </tfoot>
+    <tfoot id="order-charges" data-hook="order_details_adjustments">
+      <%% _.each(adjustments, function(adjustment) { %>  
+        <tr class="total">
+          <td colspan="4"><strong><%%= adjustment.label %></strong></td>
+          <td class="total"><span><%%= adjustment.display_amount %></span></td>
+        </tr>
+      <%% }) %>
+    </tfoot>
+  </table>
 </fieldset>
-</script>

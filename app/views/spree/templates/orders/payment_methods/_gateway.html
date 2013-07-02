@@ -1,0 +1,30 @@
+<script type='text/template' id='order-gateway-payment-method-template'>
+  <%= image_tag "credit_cards/credit_card.gif" %>
+
+  <p class="field" data-hook="card_number">
+    <label for="card_number"><%= t(:card_number) %></label><span class="required">*</span><br>
+    <input autocomplete="off" class="required" id="card_number" maxlength="19" name="order[payment_source][<%%= payment_method_id %>][number]" size="19" type="text" value="">
+  </p>
+  <p class="field" data-hook="card_expiration">
+    <label for="card_month"><%= t(:expiration) %></label><span class="required">*</span><br>
+    <select class="required" id="card_month" name="order[payment_source][<%%= payment_method_id %>][month]">
+      <% (1..12).each do |n| %>
+        <option value="<%= n %>"><%= n %></option>
+      <% end %>
+    </select>
+
+    <select class="required" id="card_year" name="order[payment_source][<%%= payment_method_id %>][year]">
+      <% (Time.now.year..(Time.now.year+15)).each do |year| %>
+        <option value="<%= year %>"><%= year %></option>
+      <% end %>
+    </select>
+  </p>
+
+  <p class="field" data-hook="card_code">
+    <label for="card_code"><%= t(:card_code) %></label><span class="required">*</span><br>
+    <input class="required" id="card_code" name="order[payment_source][<%%= payment_method_id %>][verification_value]" size="5" type="text" value="">
+    <a href="/store/content/cvv" data-hook="cvv_link" id="cvv_link" target="_blank">(What&apos;s This?)</a>
+  </p>
+  <input name="order[payment_source][<%%= payment_method_id %>][first_name]" type="hidden" value="<%%= order.bill_address.firstname %>">
+  <input name="order[payment_source][<%%= payment_method_id %>][last_name]" type="hidden" value="<%%= order.bill_address.lastname %>">
+</script>

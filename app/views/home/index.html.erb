@@ -18,12 +18,13 @@
   <%= render "spree/templates/cart/show" %>
   <%= render "spree/templates/line_items/show" %>
   <%= render "spree/templates/line_items/index" %>
-  <%= render "spree/templates/order/address" %>
-  <%= render "spree/templates/order/delivery" %>
-  <%= render "spree/templates/order/payment" %>
-  <%= render "spree/templates/order/show" %>
+  <%= render "spree/templates/checkout/address" %>
+  <%= render "spree/templates/checkout/delivery" %>
+  <%= render "spree/templates/checkout/payment" %>
+  <%= render "spree/templates/checkout/confirm" %>
+  <%= render "spree/templates/orders/show" %>
   <% @payment_method_types.each do |payment_method_type| %>
-    <%= render "spree/templates/order/payment_methods/#{payment_method_type}" %>
+    <%= render "spree/templates/orders/payment_methods/#{payment_method_type}" %>
   <% end %>
 <% end %>
 
