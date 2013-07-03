@@ -6,9 +6,10 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
       order.fetch({
         data: $.param({ order_token: SpreeStore.current_order_token}),
         success: function(order) {
-          Checkout.Controller.renderFor(order, state)
           if (order.attributes.state == "complete") {
-            SpreeStore.navigate("/orders/" + order.attributes.number)
+            SpreeStore.navigate("/orders/" + order.attributes.number, true)
+          } else {
+            Checkout.Controller.renderFor(order, state)
           }
         }
       })
