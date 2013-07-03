@@ -18,7 +18,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
     renderFor: function(order, state) {
       state = state || order.attributes.state
       SpreeStore.navigate("/checkout/" + state)
-      orderView = Order[state + 'View']
+      orderView = Checkout[state + 'View']
       if (orderView != undefined) {
         SpreeStore.mainRegion.show(new orderView({model: order}))
       } else {
