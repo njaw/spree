@@ -9,6 +9,9 @@ SpreeStore.module('Orders',function(Orders, SpreeStore, Backbone,Marionette,$,_)
         success: function(data) {
           view = new SpreeStore.Orders.ShowView({ model: order})
           SpreeStore.mainRegion.show(view)
+        },
+        error: function(xhr) {
+          SpreeStore.navigate("/products", true)
         }
       })
     }
