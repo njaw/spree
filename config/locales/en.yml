@@ -4,4 +4,4 @@
 en:
   hello: "Hello world"
   spree:
-    please_select_a_shipping_rate: "Please select a shipping rate"
+    please_select_a_shipping_rate: "Please select a shipping rate."
