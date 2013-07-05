@@ -26,7 +26,7 @@ RSpec.configure do |config|
   config.before(:each) do
     if example.metadata[:js]
       page.driver.execute_script("window.localStorage.clear()")
-      DatabaseCleaner.strategy = :truncation
+      DatabaseCleaner.strategy = :truncation, { :reset_ids => true, :pre_count => true}
     else
       DatabaseCleaner.strategy = :transaction
     end

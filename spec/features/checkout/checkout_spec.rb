@@ -15,6 +15,7 @@ feature "Checkout", :js => true do
       sm.calculator.save
     end
   end
+  let!(:payment_method) { FactoryGirl.create(:bogus_simple_payment_method) }
 
   def fill_in_address_for(type)
     field_prefix = "order_#{type}_address_attributes"
@@ -30,14 +31,24 @@ feature "Checkout", :js => true do
     end
   end
 
+  def wait_for_ajax
+    counter = 0
+    while page.execute_script("return $.active").to_i > 0
+      counter += 1
+      sleep(0.1)
+      raise "AJAX request took longer than 5 seconds." if counter >= 50
+    end
+  end
+
   def walkthrough_to_address
     visit "/"
     click_link "iPad"
     fill_in "quantity", :with => 2
     click_button 'Add To Cart'
+    wait_for_ajax
     fill_in 'Email', :with => "me@ryanbigg.com"
     click_button 'Checkout'
-    sleep(0.5)
+    wait_for_ajax
     page.current_url.should include("checkout/address")
   end
 
@@ -46,11 +57,19 @@ feature "Checkout", :js => true do
     fill_in_address_for("bill")
     check "Use Billing Address"
     click_button "Save and Continue"
-    sleep(0.5)
+    wait_for_ajax
     page.current_url.should include("checkout/delivery")
     choose shipping_method.name
     click_button "Save and Continue"
+    wait_for_ajax
     page.current_url.should include("checkout/payment")
+    fill_in "Card Number", :with => "4111111111111111"
+    select 1.month.from_now.month, :from => "card_month"
+    select 1.month.from_now.year, :from => "card_year"
+    fill_in "Card Code", :with => "123"
+    click_button "Save and Continue"
+    wait_for_ajax
+    page.current_url.should include("orders/#{Spree::Order.last.number}")
   end
 
   it "is politely asked to select a shipping rate" do
@@ -58,7 +77,7 @@ feature "Checkout", :js => true do
     fill_in_address_for("bill")
     check "Use Billing Address"
     click_button "Save and Continue"
-    sleep(0.5)
+    wait_for_ajax
     page.current_url.should include("checkout/delivery")
     within(".shipping-methods") do
       page.should_not have_content("Please select a shipping rate.")
