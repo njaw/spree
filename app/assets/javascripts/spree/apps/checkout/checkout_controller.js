@@ -7,6 +7,8 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
         data: $.param({ order_token: SpreeStore.current_order_token}),
         success: function(order) {
           if (order.attributes.state == "complete") {
+            window.localStorage.removeItem('current_order_id');
+            window.localStorage.removeItem('current_order_token');
             SpreeStore.navigate("/orders/" + order.attributes.number, true)
           } else {
             Checkout.Controller.renderFor(order, state)
