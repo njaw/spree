@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/radar/spree.git
-  revision: 2f942f3905cc39ef7c38910113e47fa7a898dcfd
+  revision: d31e2d0e067bf6eaf417bd4db0470093396107fd
   branch: master
   specs:
     spree (2.1.0.beta)
@@ -53,6 +53,15 @@ GIT
       stringex (~> 1.5.1)
     spree_sample (2.1.0.beta)
       spree_core (= 2.1.0.beta)
+
+GIT
+  remote: git://github.com/radar/spree_gateway.git
+  revision: e123b94c039499146980ba70181d9dfc64f47472
+  branch: master
+  specs:
+    spree_gateway (2.1.0.beta)
+      savon (~> 1.2)
+      spree_core (~> 2.0)
 
 GIT
   remote: git://github.com/spree/spree_auth_devise.git
@@ -110,6 +119,9 @@ GEM
       multi_json (~> 1.0)
     acts_as_list (0.2.0)
       activerecord (>= 3.0)
+    akami (1.2.0)
+      gyoku (>= 0.4.0)
+      nokogiri (>= 1.4.0)
     arel (3.0.2)
     awesome_nested_set (2.1.5)
       activerecord (>= 3.0.0)
@@ -165,11 +177,15 @@ GEM
       railties (>= 3.0.0)
     ffaker (1.16.1)
     ffi (1.9.0)
+    gyoku (0.4.6)
+      builder (>= 2.1.2)
     highline (1.6.18)
     hike (1.2.3)
     httparty (0.11.0)
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
+    httpi (1.1.1)
+      rack
     i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (3.0.1)
@@ -195,6 +211,7 @@ GEM
     multi_json (1.7.7)
     multi_xml (0.5.4)
     nokogiri (1.5.10)
+    nori (1.1.5)
     orm_adapter (0.4.0)
     paperclip (3.4.2)
       activemodel (>= 3.0.0)
@@ -257,6 +274,14 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    savon (1.2.0)
+      akami (~> 1.2.0)
+      builder (>= 2.1.2)
+      gyoku (~> 0.4.5)
+      httpi (~> 1.1.0)
+      nokogiri (>= 1.4.0)
+      nori (~> 1.1.0)
+      wasabi (~> 2.5.0)
     select2-rails (3.2.1)
       thor (~> 0.14)
     selenium-webdriver (2.33.0)
@@ -290,6 +315,9 @@ GEM
       railties (>= 3.0)
     warden (1.2.1)
       rack (>= 1.0)
+    wasabi (2.5.1)
+      httpi (~> 1.0)
+      nokogiri (>= 1.4.0)
     websocket (1.0.7)
     xpath (2.0.0)
       nokogiri (~> 1.3)
@@ -313,5 +341,6 @@ DEPENDENCIES
   selenium-webdriver (= 2.33.0)
   spree!
   spree_auth_devise!
+  spree_gateway!
   sqlite3
   uglifier (>= 1.0.3)
