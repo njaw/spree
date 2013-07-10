@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130702232753) do
+ActiveRecord::Schema.define(:version => 20130709023960) do
 
   create_table "spree_activators", :force => true do |t|
     t.string   "description"
@@ -470,6 +470,17 @@ ActiveRecord::Schema.define(:version => 20130702232753) do
 
   add_index "spree_shipping_rates", ["shipment_id", "shipping_method_id"], :name => "spree_shipping_rates_join_index", :unique => true
 
+  create_table "spree_skrill_transactions", :force => true do |t|
+    t.string   "email"
+    t.float    "amount"
+    t.string   "currency"
+    t.integer  "transaction_id"
+    t.integer  "customer_id"
+    t.string   "payment_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "spree_state_changes", :force => true do |t|
     t.string   "name"
     t.string   "previous_state"
@@ -561,6 +572,7 @@ ActiveRecord::Schema.define(:version => 20130702232753) do
     t.datetime "updated_at",                                                          :null => false
     t.string   "name"
     t.boolean  "show_rate_in_label",                               :default => true
+    t.datetime "deleted_at"
   end
 
   create_table "spree_taxonomies", :force => true do |t|
