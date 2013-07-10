@@ -8,9 +8,6 @@ SpreeStore.module('Products.Show',function(Show, SpreeStore, Backbone,Marionette
           var product_view = new Show.Product({
             model: model
           })
-          
-          $('.pagination').hide();
-          SpreeStore.noSidebar()
           SpreeStore.mainRegion.show(product_view)
         }
       })

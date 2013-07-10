@@ -26,5 +26,13 @@ feature "Viewing products", :js => true do
     within("#top-pagination") do
       click_link '1'
     end
+
+  end
+
+  scenario "viewing a product" do
+    visit "/"
+    click_link 'iPad'
+    wait_for_ajax
+    assert_no_sidebar_or_pagination
   end
 end

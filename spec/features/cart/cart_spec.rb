@@ -27,14 +27,27 @@ feature "Cart", :js => true do
     page.should have_content("Your cart is empty")
   end
 
-  it "does not error out when an order has been deleted" do
-    visit "/"
-    page.execute_script("window.localStorage.currentOrderId = 'totally-invalid-order-id'")
-    visit "/"
-    page.should have_content("CART: EMPTY", :css => "#link-to-cart")
-    page.should have_content("We couldn't find your cart. Please start again.", :css => ".error")
-    visit "/"
-    page.should_not have_content("We couldn't find your cart. Please start again.", :css => ".error")
-  end
+  context "with invalid order id" do
+    before do
+      visit "/"
+      page.execute_script("window.localStorage.currentOrderId = 'totally-invalid-order-id'")
+    end
 
+    it "does not error out when an order has been deleted" do
+      visit "/"
+      page.should have_content("CART: EMPTY", :css => "#link-to-cart")
+      page.should have_content("We couldn't find your cart. Please start again.", :css => ".error")
+      visit "/"
+      page.should_not have_content("We couldn't find your cart. Please start again.", :css => ".error")
+    end
+
+    it "clicking an invalid cart hides sidebar + pagination, shows empty cart page" do
+      visit "/"
+      page.execute_script("window.localStorage.currentOrderId = 'totally-invalid-order-id'")
+      visit "/"
+      click_link "Cart: Empty"
+      page.should have_content("Your cart is empty")
+      assert_no_sidebar_or_pagination
+    end
+  end
 end

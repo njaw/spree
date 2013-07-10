@@ -8,6 +8,11 @@ SpreeStore.module('Products.Show',function(Show, SpreeStore, Backbone,Marionette
       "click button": "addToCart"
     },
 
+    onShow: function() {
+      $('.pagination').hide();
+      SpreeStore.noSidebar()
+    },
+
     addToCart: function (e) {
       var quantity = $(this.el).find("input").val()
       var variant_id = this.model.variants.first().id

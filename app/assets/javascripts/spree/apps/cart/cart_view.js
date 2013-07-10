@@ -68,6 +68,10 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
       "click #checkout-link": "beginCheckout"
     },
 
+    onShow: function() {
+      SpreeStore.noSidebar()
+    },
+
     updateOrderData: function(options) {
       model = new SpreeStore.Models.Order({ number: SpreeStore.currentOrderId })
       // Next is only passed as an option when checkout button is pressed
@@ -140,7 +144,13 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
       "click button": function() {
         SpreeStore.navigate("/products", true);
       }
+    },
+
+    onShow: function() {
+      $('.pagination').hide()
+      SpreeStore.noSidebar()
     }
+    
   })
 
   Cart.LineItems = Backbone.Marionette.CompositeView.extend({

@@ -81,16 +81,19 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
         model.fetch({
           data: $.param({ order_token: SpreeStore.currentOrderToken}),
           success: function(data) {
-            cart_view = new Cart.CartView({
+            cartView = new Cart.CartView({
               model: data,
               collection: new SpreeStore.Models.LineItems(data.attributes.line_items)
             })
             if (data.attributes.state != 'cart') {
               SpreeStore.navigate("/checkout/" + data.attributes.state, true)
             } else {
-              SpreeStore.mainRegion.show(cart_view)
-              SpreeStore.noSidebar()
+              SpreeStore.mainRegion.show(cartView)
             }
+          },
+          error: function(data) {
+            emptyCartView = new Cart.EmptyCart
+            SpreeStore.mainRegion.show(emptyCartView)
           }
         });
       } else {

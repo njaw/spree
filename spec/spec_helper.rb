@@ -37,6 +37,7 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do
+    wait_for_ajax
     DatabaseCleaner.clean
   end
 
