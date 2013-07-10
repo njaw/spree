@@ -27,4 +27,14 @@ feature "Cart", :js => true do
     page.should have_content("Your cart is empty")
   end
 
+  it "does not error out when an order has been deleted" do
+    visit "/"
+    page.execute_script("window.localStorage.currentOrderId = 'totally-invalid-order-id'")
+    visit "/"
+    page.should have_content("CART: EMPTY", :css => "#link-to-cart")
+    page.should have_content("We couldn't find your cart. Please start again.", :css => ".error")
+    visit "/"
+    page.should_not have_content("We couldn't find your cart. Please start again.", :css => ".error")
+  end
+
 end

@@ -8,11 +8,18 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
         model.fetch({
           data: $.param({ order_token: SpreeStore.currentOrderToken}),
           success: function(data) {
-            var cart_info_view = new Cart.CartInfoView({
+            var cartInfoView = new Cart.CartInfoView({
               model: data
             })
-            SpreeStore.cartInfo.show(cart_info_view)
+            SpreeStore.cartInfo.show(cartInfoView)
           },
+          error: function() {
+            window.localStorage.removeItem('currentOrderId')
+            window.localStorage.removeItem('currentOrderToken')
+            SpreeStore.flash.error("We couldn't find your cart. Please start again.")
+            var emptyCartInfoView = new Cart.EmptyCartInfoView()
+            SpreeStore.cartInfo.show(emptyCartInfoView)
+          }
         })
       }
     },

@@ -13,6 +13,10 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     }
   });
 
+  Cart.EmptyCartInfoView = Cart.CartInfoView.extend({
+    template: '#empty-cart-info-template'
+  })
+
   Cart.LineItem = Backbone.Marionette.ItemView.extend({
     tagName: 'tr',
     template: "#line-item-template",

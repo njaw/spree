@@ -20,7 +20,8 @@
         <%= render :partial => 'spree/shared/sidebar' if content_for? :sidebar %>
 
         <div id="content" class="columns twelve" data-hook>
-          <%= flash_messages %>
+          <div class="flash notice" style='display:none'></div>
+          <div class="flash error" style='display:none'></div>
           <%= yield %>
         </div>
 
@@ -41,7 +42,8 @@
       if (SpreeStore.currentOrderId) {
         $('#link-to-cart').html("<a href='#'><%= Spree.t(:cart) %>: <img src='/assets/loading.gif'></a>")
       } else {
-        $('#link-to-cart').html("<a href='#'><%= Spree.t(:cart) %>: <%= Spree.t(:empty) %></a>")
+        var emptyCartInfoView = new SpreeStore.Cart.EmptyCartInfoView()
+        SpreeStore.cartInfo.show(emptyCartInfoView)
       }
       SpreeStore.start();
     })
