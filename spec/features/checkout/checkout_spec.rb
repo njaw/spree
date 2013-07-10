@@ -41,6 +41,8 @@ feature "Checkout", :js => true do
     click_button 'Checkout'
     wait_for_ajax
     page.current_url.should include("checkout/address")
+    page.find(".progress-steps .current").text.should == 'ADDRESS'
+    page.find(".progress-steps .next").text.should == 'DELIVERY'
   end
 
   it "can walk through the entire cart" do
@@ -50,10 +52,14 @@ feature "Checkout", :js => true do
     click_button "Save and Continue"
     wait_for_ajax
     page.current_url.should include("checkout/delivery")
+    page.find(".progress-steps .current").text.should == 'DELIVERY'
+    page.find(".progress-steps .next").text.should == 'PAYMENT'
     choose shipping_method.name
     click_button "Save and Continue"
     wait_for_ajax
     page.current_url.should include("checkout/payment")
+    page.find(".progress-steps .current").text.should == 'PAYMENT'
+    page.find(".progress-steps .next").text.should == 'COMPLETE'
     fill_in "Card Number", :with => "4111111111111111"
     select 1.month.from_now.month, :from => "card_month"
     select 1.month.from_now.year, :from => "card_year"
