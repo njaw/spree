@@ -17,7 +17,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
             window.localStorage.removeItem('currentOrderId')
             window.localStorage.removeItem('currentOrderToken')
             SpreeStore.flash.error("We couldn't find your cart. Please start again.")
-            var emptyCartInfoView = new Cart.EmptyCartInfoView()
+            var emptyCartInfoView = new Cart.EmptyCartInfoView
             SpreeStore.cartInfo.show(emptyCartInfoView)
           }
         })
