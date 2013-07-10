@@ -7,9 +7,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
         data: $.param({ order_token: SpreeStore.currentOrderToken}),
         success: function(order) {
           if (order.attributes.state == "complete") {
-            window.localStorage.removeItem('currentOrderId');
-            window.localStorage.removeItem('currentOrderToken');
-            SpreeStore.navigate("/orders/" + order.attributes.number, true)
+            this.orderCompleted();
           } else {
             Checkout.Controller.renderFor(order, state)
           }
@@ -24,9 +22,19 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
       if (orderView != undefined) {
         SpreeStore.mainRegion.show(new orderView({model: order}))
       } else {
-        SpreeStore.navigate("/checkout/" + order.attributes.state)
-        this.renderFor(order, order.attributes.state)
+        if (order.attributes.state == "complete") {
+          this.orderCompleted()
+        } else {
+          SpreeStore.navigate("/checkout/" + order.attributes.state)
+          this.renderFor(order, order.attributes.state)
+        }
       }
+    },
+
+    orderCompleted: function() {
+      window.localStorage.removeItem('currentOrderId');
+      window.localStorage.removeItem('currentOrderToken');
+      SpreeStore.navigate("/orders/" + order.attributes.number, true)
     }
   }
 })
