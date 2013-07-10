@@ -1,23 +1,23 @@
 SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
   Cart.Controller = {
     showCartInfo: function() {
-      if (SpreeStore.current_order_id !== undefined) {
+      if (SpreeStore.currentOrderId !== undefined) {
         model = new SpreeStore.Models.Order({
-          number: SpreeStore.current_order_id
-        })
-        var cart_info_view = new Cart.CartInfoView({
-          model: model
+          number: SpreeStore.currentOrderId
         })
         model.fetch({
-          data: $.param({ order_token: SpreeStore.current_order_token}),
+          data: $.param({ order_token: SpreeStore.currentOrderToken}),
           success: function(data) {
+            var cart_info_view = new Cart.CartInfoView({
+              model: data
+            })
             SpreeStore.cartInfo.show(cart_info_view)
-          }
+          },
         })
       }
     },
     addToCart: function(id, quantity) {
-      if (SpreeStore.current_order_id === undefined) {
+      if (SpreeStore.currentOrderId === undefined) {
         Cart.Controller.newCheckout(id, quantity)
       } else {
         Cart.Controller.addLineItem(id, quantity)
@@ -26,7 +26,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
 
     newCheckout: function(id, quantity) {
       $.ajax({
-        type: 'POST', 
+        type: 'POST',
         url: '/store/api/orders',
         data: {
           order: {
@@ -39,8 +39,8 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
           }
         },
         success: function(data) {
-          window.localStorage['current_order_token'] = SpreeStore.current_order_token = data.token
-          window.localStorage['current_order_id'] = SpreeStore.current_order_id = data.number
+          window.localStorage['currentOrderToken'] = SpreeStore.currentOrderToken = data.token
+          window.localStorage['currentOrderId'] = SpreeStore.currentOrderId = data.number
           Cart.Controller.updateCart(data)
         }
       })
@@ -49,9 +49,9 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     addLineItem: function(id, quantity) {
       $.ajax({
         type: 'post',
-        url: '/store/api/orders/' + SpreeStore.current_order_id + '/line_items',
+        url: '/store/api/orders/' + SpreeStore.currentOrderId + '/line_items',
         data: {
-          order_token: SpreeStore.current_order_token,
+          order_token: SpreeStore.currentOrderToken,
           line_item: {
             variant_id: id,
             quantity: quantity
@@ -69,10 +69,10 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     },
 
     preview: function() {
-      if (SpreeStore.current_order_id) {
-        model = new SpreeStore.Models.Order({ number: SpreeStore.current_order_id })
-        model.fetch({ 
-          data: $.param({ order_token: SpreeStore.current_order_token}),
+      if (SpreeStore.currentOrderId) {
+        model = new SpreeStore.Models.Order({ number: SpreeStore.currentOrderId })
+        model.fetch({
+          data: $.param({ order_token: SpreeStore.currentOrderToken}),
           success: function(data) {
             cart_view = new Cart.CartView({
               model: data,

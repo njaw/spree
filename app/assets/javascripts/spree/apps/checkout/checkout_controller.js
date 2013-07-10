@@ -2,13 +2,13 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
   Checkout.Controller = {
     show: function(state) {
       SpreeStore.noSidebar()
-      order = new SpreeStore.Models.Order({ number: SpreeStore.current_order_id })
+      order = new SpreeStore.Models.Order({ number: SpreeStore.currentOrderId })
       order.fetch({
-        data: $.param({ order_token: SpreeStore.current_order_token}),
+        data: $.param({ order_token: SpreeStore.currentOrderToken}),
         success: function(order) {
           if (order.attributes.state == "complete") {
-            window.localStorage.removeItem('current_order_id');
-            window.localStorage.removeItem('current_order_token');
+            window.localStorage.removeItem('currentOrderId');
+            window.localStorage.removeItem('currentOrderToken');
             SpreeStore.navigate("/orders/" + order.attributes.number, true)
           } else {
             Checkout.Controller.renderFor(order, state)

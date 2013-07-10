@@ -11,8 +11,8 @@
 //= require_tree ../spree/apps/products/show
 Spree = {}
 SpreeStore = new Backbone.Marionette.Application()
-SpreeStore.current_order_id = window.localStorage['current_order_id']
-SpreeStore.current_order_token = window.localStorage['current_order_token']
+SpreeStore.currentOrderId = window.localStorage['currentOrderId']
+SpreeStore.currentOrderToken = window.localStorage['currentOrderToken']
 
 SpreeStore.MainRegion = Backbone.Marionette.Region.extend({
   el: '.fast-freddy'
@@ -45,7 +45,7 @@ SpreeStore.getCurrentRoute = function() {
 
 SpreeStore.on("initialize:before", function(){
   $.get('/store/api/config/money', function(data) {
-    Spree.Money.Settings = data  
+    Spree.Money.Settings = data
   })
 
   $.get('/store/api/config', function(data) {

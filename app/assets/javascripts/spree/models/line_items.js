@@ -1,7 +1,7 @@
 SpreeStore.module('Models',function(Models, SpreeStore, Backbone,Marionette,$,_){
   Models.LineItem = Backbone.Model.extend({
     url: function() {
-      return '/store/api/orders/' + SpreeStore.current_order_id + '/line_items/' + this.id
+      return '/store/api/orders/' + SpreeStore.currentOrderId + '/line_items/' + this.id
     },
 
     setQuantity: function(quantity) {
@@ -17,7 +17,7 @@ SpreeStore.module('Models',function(Models, SpreeStore, Backbone,Marionette,$,_)
   Models.LineItems = Backbone.Collection.extend({
     model: Models.LineItem,
     url: function() {
-      return '/store/api/orders/' + SpreeStore.current_order_id + '/line_items'
+      return '/store/api/orders/' + SpreeStore.currentOrderId + '/line_items'
     }
   })
 })

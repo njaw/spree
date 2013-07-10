@@ -15,12 +15,12 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
       e.stopPropagation();
       e.preventDefault();
       $(e.target).find("input[type='submit']").slideUp(function() {
-        $('#checkout #loading').show();  
+        $('#checkout #loading').show();
       });
       if (this.validate()) {
         // TODO: Doing it this way because I don't know how to deal with nested attrs in Backbone
         var data = Backbone.Syphon.serialize(this)
-        data['order_token'] = SpreeStore.current_order_token
+        data['order_token'] = SpreeStore.currentOrderToken
         $.ajax({
           type: 'PUT',
           dataType: 'json',

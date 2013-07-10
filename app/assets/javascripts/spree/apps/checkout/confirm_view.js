@@ -14,7 +14,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
       e.stopPropagation();
       e.preventDefault();
       data = {} // There is no data to be submitted on the confirmation screen
-      data['order_token'] = SpreeStore.current_order_token
+      data['order_token'] = SpreeStore.currentOrderToken
       $.ajax({
         type: 'PUT',
         dataType: 'json',

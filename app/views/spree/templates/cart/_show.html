@@ -26,7 +26,7 @@
           <h5>Subtotal: <span class="order-total"><%%= line_items_total() %></span></h5>
         </div>
         <div class="links columns sixteen alpha omega" data-hook="cart_buttons">
-          <input type='hidden' name='order_token' value='<%%= SpreeStore.current_order_token %>'>
+          <input type='hidden' name='order_token' value='<%%= SpreeStore.currentOrderToken %>'>
           <input id="order_coupon_code" name="order[coupon_code]" placeholder="Coupon code" size="10" type="text">
           <button class="primary" id="update-button">Update</button>
           <button class="button checkout primary" id="checkout-link" name="checkout">Checkout</button>

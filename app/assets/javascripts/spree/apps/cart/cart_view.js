@@ -65,7 +65,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     },
 
     updateOrderData: function(options) {
-      model = new SpreeStore.Models.Order({ number: SpreeStore.current_order_id })
+      model = new SpreeStore.Models.Order({ number: SpreeStore.currentOrderId })
       // Next is only passed as an option when checkout button is pressed
       // It is only in this event do we want the next event to be triggered,
       // which is what happens in CheckoutsController's API.
@@ -79,7 +79,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
       }
 
       data = this.$('#update-cart').serialize()
-      data.order_token = SpreeStore.current_order_token
+      data.order_token = SpreeStore.currentOrderToken
       $.ajax({
         method: 'PUT',
         url: url,

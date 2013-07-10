@@ -45,7 +45,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
         country_id = target.find("option").attr('value')
       }
       $.ajax({
-        url: '/store/api/states', 
+        url: '/store/api/states',
         data: { country_id: country_id, per_page: 100 },
         success: function(data) {
           var fieldset = target.parents("fieldset")
@@ -76,7 +76,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
       // TODO: Doing it this way because I don't know how to deal with nested attrs in Backbone
       // jQuery is easier, again.
       var data = Backbone.Syphon.serialize(this)
-      data['order_token'] = SpreeStore.current_order_token
+      data['order_token'] = SpreeStore.currentOrderToken
       $.ajax({
         type: 'PUT',
         dataType: 'json',
