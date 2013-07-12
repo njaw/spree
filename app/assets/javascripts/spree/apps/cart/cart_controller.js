@@ -85,11 +85,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
               model: data,
               collection: new SpreeStore.Models.LineItems(data.attributes.line_items)
             })
-            if (data.attributes.state != 'cart') {
-              SpreeStore.navigate("/checkout/" + data.attributes.state, true)
-            } else {
-              SpreeStore.mainRegion.show(cartView)
-            }
+            SpreeStore.mainRegion.show(cartView)
           },
           error: function(data) {
             emptyCartView = new Cart.EmptyCart
