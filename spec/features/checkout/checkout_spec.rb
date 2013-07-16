@@ -45,7 +45,7 @@ feature "Checkout", :js => true do
     page.find(".progress-steps .next").text.should == 'DELIVERY'
   end
 
-  it "can walk through the entire cart" do
+  def walkthrough_to_delivery
     walkthrough_to_address
     fill_in_address_for("bill")
     check "Use Billing Address"
@@ -54,12 +54,20 @@ feature "Checkout", :js => true do
     page.current_url.should include("checkout/delivery")
     page.find(".progress-steps .current").text.should == 'DELIVERY'
     page.find(".progress-steps .next").text.should == 'PAYMENT'
+  end
+
+  def walkthrough_to_payment
+    walkthrough_to_delivery
     choose shipping_method.name
     click_button "Save and Continue"
     wait_for_ajax
     page.current_url.should include("checkout/payment")
     page.find(".progress-steps .current").text.should == 'PAYMENT'
     page.find(".progress-steps .next").text.should == 'COMPLETE'
+  end
+
+  it "can walk through the entire cart" do
+    walkthrough_to_payment
     fill_in "Card Number", :with => "4111111111111111"
     select 1.month.from_now.month, :from => "card_month"
     select 1.month.from_now.year, :from => "card_year"
@@ -87,6 +95,19 @@ feature "Checkout", :js => true do
     within(".shipping-methods") do
       page.should_not have_content("Please select a shipping rate.")
     end
+  end
+
+  it "is shown errors about a credit card" do
+    walkthrough_to_payment
+    click_button "Save and Continue"
+    within("#errorExplanation") do
+      page.should have_content("Number can't be blank")
+      page.should have_content("Verification Value can't be blank")
+      page.should have_content("Card has expired")
+    end
+    page.should have_selector(".continue", :visible => true)
+    page.should have_selector("#loading", :visible => false)
+
   end
 
   it "can update items in the cart" do

@@ -1,0 +1,10 @@
+<script type='text/template' id='payment_errors_template'>
+  
+
+  <h2><%%= Object.keys(errors).length %> fields need attention:</h2>
+  <ul>
+    <%% _.each(errors, function(error) { %>
+      <li><%%= error %></li>
+    <%% }) %>
+  </ul>
+</script>

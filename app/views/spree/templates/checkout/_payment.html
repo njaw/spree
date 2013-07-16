@@ -9,6 +9,9 @@
           <fieldset id="payment" data-hook>
             <legend align="center"><%= Spree.t(:payment_information) %></legend>
             <div data-hook="checkout_payment_step">
+              <div id="errorExplanation" class="errorExplanation" data-hook="" style='display:none'>
+                Content goes here.
+              </div>
               <%% _.each(payment_methods, function(method) { %>
                 <p>
                   <label>

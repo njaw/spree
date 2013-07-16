@@ -12,9 +12,11 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
     },
 
     updateOrder: function(e) {
+      $('#errorExplanation').hide();
       e.stopPropagation();
       e.preventDefault();
-      $(e.target).find("input[type='submit']").slideUp(function() {
+      var submit_button = $(e.target).find("input[type='submit']")
+      submit_button.slideUp(function() {
         $('#checkout #loading').show();
       });
       if (this.validate()) {
@@ -31,7 +33,13 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
             SpreeStore.Checkout.Controller.renderFor(order)
           },
           error: function(xhr) {
-            alert(xhr.responseText)
+            submit_button.stop();
+            submit_button.show();
+            $('#checkout #loading').hide();
+            var errors = JSON.parse(xhr.responseText).errors["payments.Credit Card"]
+            var error_markup = _.template($('#payment_errors_template').text(), { errors: errors })
+            console.log(error_markup)
+            $('#errorExplanation').show().html(error_markup)
           }
         })
       }
@@ -47,7 +55,6 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
       var id_pieces = target.attr('id').split("-");
       var id = id_pieces[id_pieces.length-1];
       template = _.template($('#order-' + method_type + '-payment-method-template').html(), { payment_method_id: id, order: this.model.attributes })
-      console.log(template)
       $('#payment-method-info').html(template)
     }
   })
