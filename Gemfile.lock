@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/radar/spree.git
-  revision: 8efbd87573b1076c48369a994b5e1f0f3b2bfa6e
+  revision: 2e564ffdc4c90f98f0e5f0649dd7232e600745f0
   branch: master
   specs:
     spree (2.1.0.beta)
@@ -45,6 +45,7 @@ GIT
       stringex (~> 1.5.1)
       truncate_html (= 0.9.2)
     spree_frontend (2.1.0.beta)
+      canonical-rails
       deface (>= 0.9.0)
       jquery-rails (~> 3.0.0)
       rails (~> 3.2.13)
@@ -57,7 +58,7 @@ GIT
 
 GIT
   remote: git://github.com/spree/spree_auth_devise.git
-  revision: 5ac2aa4a687454f428c29fe3b12de91acae7f08f
+  revision: fd2ef457225dc80deb86c9fd8476bf1ff6b929ef
   branch: master
   specs:
     spree_auth_devise (2.1.0)
@@ -133,9 +134,11 @@ GEM
       uuidtools (~> 2.1)
     backbone-rails (1.0.0)
       rails (>= 3.0.0)
-    bcrypt-ruby (3.1.0)
+    bcrypt-ruby (3.1.1)
     builder (3.0.4)
     cancan (1.6.8)
+    canonical-rails (0.0.3)
+      rails (>= 3.1, < 5.0)
     capybara (2.1.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -189,7 +192,7 @@ GEM
       rack
     i18n (0.6.1)
     journey (1.0.4)
-    jquery-rails (3.0.2)
+    jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (4.0.3)
@@ -308,7 +311,7 @@ GEM
       polyglot (>= 0.3.1)
     truncate_html (0.9.2)
     tzinfo (0.3.37)
-    uglifier (2.1.1)
+    uglifier (2.1.2)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     uuidtools (2.1.4)
@@ -316,7 +319,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-    warden (1.2.1)
+    warden (1.2.3)
       rack (>= 1.0)
     wasabi (2.5.1)
       httpi (~> 1.0)
