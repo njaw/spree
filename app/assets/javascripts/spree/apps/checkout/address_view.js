@@ -73,6 +73,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
     },
 
     updateOrder: function(e) {
+      $('#errorExplanation').hide();
       // TODO: Doing it this way because I don't know how to deal with nested attrs in Backbone
       // jQuery is easier, again.
       var data = Backbone.Syphon.serialize(this)
