@@ -52,8 +52,8 @@
                   <%% _.each(shipment.shipping_rates, function(shipping_rate, sr_index) { %>
                     <li class="shipping-method">
                       <label>
-                        <input name="order[shipments_attributes][<%%= sr_index %>][id]" type="hidden" value="<%%= shipment.id %>">
-                        <input name="order[shipments_attributes][<%%= sr_index %>][selected_shipping_rate_id]" type="radio" value="<%%= shipping_rate.id %>">
+                        <input name="order[shipments_attributes][<%%= shipment.id %>][id]" type="hidden" value="<%%= shipment.id %>">
+                        <input name="order[shipments_attributes][<%%= shipment.id %>][selected_shipping_rate_id]" type="radio" value="<%%= shipping_rate.id %>">
                         <span class="rate-name"><%%= shipping_rate.name %></span>
                         <span class="rate-cost"><%%= shipping_rate.display_cost %></span>
                       </label>
