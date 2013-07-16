@@ -85,7 +85,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
         data: data,
         success: function(data) {
           var order = new SpreeStore.Models.Order(data)
-          SpreeStore.Checkout.Controller.renderFor(order)
+          SpreeStore.Checkout.Controller.renderFor(order, data.state)
         },
         error: function(xhr) {
           var errors = JSON.parse(xhr.responseText).errors
