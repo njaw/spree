@@ -73,14 +73,15 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     },
 
     updateOrderData: function(options) {
-      model = new SpreeStore.Models.Order({ number: SpreeStore.currentOrderId })
+      model = new SpreeStore.Models.Order({ number: SpreeStore.currentOrderId });
+      var should_transition_next = options && options.next;
       // Next is only passed as an option when checkout button is pressed
       // It is only in this event do we want the next event to be triggered,
       // which is what happens in CheckoutsController's API.
       //
       // When updating through the Orders API, the next method is not called.
       // This makes the Orders API ideal for the "Update" button.
-      if (options && options.next) {
+      if (should_transition_next) {
         var url = '/store/api/checkouts/' + model.attributes.number
       } else {
         var url = model.url();
@@ -95,8 +96,8 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
         success: function(data) {
           Cart.Controller.showCartInfo()
           Cart.Controller.updateCart(data)
-          if (data.state != 'cart') {
-            SpreeStore.navigate("/checkout", true)
+          if (data.state != 'cart' && should_transition_next) {
+            SpreeStore.navigate("/checkout/" + data.state, true)
           }
         },
         error: function(xhr) {
@@ -116,7 +117,7 @@ SpreeStore.module('Cart',function(Cart, SpreeStore, Backbone,Marionette,$,_){
     beginCheckout: function(e) {
       e.stopPropagation();
       e.preventDefault();
-      this.updateOrderData({ next: true});
+      this.updateOrderData({ next: true });
     },
 
 

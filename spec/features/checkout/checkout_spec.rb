@@ -89,6 +89,19 @@ feature "Checkout", :js => true do
     end
   end
 
+  it "can update items in the cart" do
+    walkthrough_to_address
+    find("#link-to-cart a").click
+    page.should have_content("Shopping Cart")
+    fill_in "order[line_items_attributes][1][quantity]", :with => 10
+    click_button "Checkout"
+    wait_for_ajax
+    page.current_url.should include("checkout/address")
+    within("#checkout-summary") do
+      page.should have_content("10 x iPad")
+    end
+  end
+
   it "can jump back to a previous state"
 
   it "cannot navigate to an invalid state"
