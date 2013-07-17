@@ -12,10 +12,10 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
     },
 
     updateOrder: function(e) {
+      $(e.target).attr('disabled', 'disabled');
       e.stopPropagation();
       e.preventDefault();
       if (this.validate()) {
-        // TODO: Doing it this way because I don't know how to deal with nested attrs in Backbone
         var data = Backbone.Syphon.serialize(this)
         data['order_token'] = SpreeStore.currentOrderToken
         $.ajax({
@@ -27,6 +27,10 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
             var order = new SpreeStore.Models.Order(data)
             SpreeStore.Checkout.Controller.renderFor(order)
           },
+          error: function(xhr) {
+            alert(xhr.responseText);
+            $(e.target).attr('disabled', '');
+          }
         })
       }
     },
@@ -39,6 +43,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
         if (shipping_method_el.find("input[type='radio']:checked").length == 0) {
           validation_errors++;
           validation_error.show();
+          $(e.target).attr('disabled', '');
         } else {
           validation_error.hide();
         }

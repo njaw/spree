@@ -95,6 +95,8 @@ feature "Checkout", :js => true do
     within(".shipping-methods") do
       page.should_not have_content("Please select a shipping rate.")
     end
+    click_button "Save and Continue"
+    page.current_url.should include("checkout/payment")
   end
 
   it "is shown errors about a credit card" do

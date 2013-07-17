@@ -74,8 +74,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
 
     updateOrder: function(e) {
       $('#errorExplanation').hide();
-      // TODO: Doing it this way because I don't know how to deal with nested attrs in Backbone
-      // jQuery is easier, again.
+      $(e.target).attr('disabled', 'disabled');
       var data = Backbone.Syphon.serialize(this)
       data['order_token'] = SpreeStore.currentOrderToken
       $.ajax({
@@ -88,6 +87,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
           SpreeStore.Checkout.Controller.renderFor(order, data.state)
         },
         error: function(xhr) {
+          $(e.target).attr('disabled', '');
           var errors = JSON.parse(xhr.responseText).errors
           var error_markup = _.template($('#errors_template').text(), { errors: errors })
           $('#errorExplanation').show().html(error_markup)

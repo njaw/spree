@@ -11,6 +11,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
     },
 
     updateOrder: function(e) {
+      $(e.target).attr('disabled', 'disabled')
       e.stopPropagation();
       e.preventDefault();
       data = {} // There is no data to be submitted on the confirmation screen
@@ -26,6 +27,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
         },
         error: function(xhr) {
           alert(xhr.responseText)
+          $(e.target).attr('disabled', '')
         }
       })
     },

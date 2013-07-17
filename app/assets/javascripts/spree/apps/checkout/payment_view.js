@@ -16,11 +16,11 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
       e.stopPropagation();
       e.preventDefault();
       var submit_button = $(e.target).find("input[type='submit']")
+      submit_button.attr('disabled', 'disabled');
       submit_button.slideUp(function() {
         $('#checkout #loading').show();
       });
       if (this.validate()) {
-        // TODO: Doing it this way because I don't know how to deal with nested attrs in Backbone
         var data = Backbone.Syphon.serialize(this)
         data['order_token'] = SpreeStore.currentOrderToken
         $.ajax({
@@ -33,12 +33,12 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
             SpreeStore.Checkout.Controller.renderFor(order)
           },
           error: function(xhr) {
+            submit_button.attr('disabled', '')
             submit_button.stop();
             submit_button.show();
             $('#checkout #loading').hide();
             var errors = JSON.parse(xhr.responseText).errors["payments.Credit Card"]
             var error_markup = _.template($('#payment_errors_template').text(), { errors: errors })
-            console.log(error_markup)
             $('#errorExplanation').show().html(error_markup)
           }
         })
