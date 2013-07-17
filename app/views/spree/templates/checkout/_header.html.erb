@@ -2,27 +2,39 @@
   <h1 class="columns three alpha" data-hook="checkout_title"><%= t(:checkout) %></h1>
   <div class="columns thirteen omega" data-hook="checkout_progress">
     <ol class="progress-steps" id="checkout-step-address">
-      <%% _.each(order.attributes.checkout_steps, function(step, index) {
-        var class_attrs = [];
-        if (step == state) {
-          class_attrs.push('current')
+      <%% current_order_state = state %>
+      <%% state = SpreeStore.Checkout.Controller.state || state %>
+      <%% steps = order.attributes.checkout_steps %>
+      <%% _.each(steps, function(step, index) {
+        var css_classes = [];
+        var link = false;
+        var current_index = steps.indexOf(current_order_state)
+        if (index < current_index) {
+          css_classes.push('completed')
+          link = true;
         }
-        // Append 'next' to list of classes applied to the next state
-        if (index == order.attributes.checkout_steps.indexOf(state)+1) {
-          class_attrs.push('next')
+        if (index == current_index + 1) {
+          css_classes.push('next')
         }
-
-        // Append 'first' to the first element in the series
+        if (index == current_index) {
+          css_classes.push('current')
+        }
         if (index == 0) {
-          class_attrs.push('first')
+          css_classes.push('first')
         }
-
-        // Append 'last' to the last element in the series
-        if (index == order.attributes.checkout_steps.length-1) {
-          class_attrs.push('last')
+        if (index == steps.length-1) {
+          css_classes.push('last')
         }
-      %>
-        <li class="<%%= class_attrs.join(" ") %>"><%%= _.titleize(step) %></li>
+      %> 
+        <li class="<%%= css_classes.join("-") %>">
+          <span>
+            <%% if (link) { %>
+              <a href='#checkout/<%%= step %>'><%%= _.titleize(step) %></a>
+            <%% } else { %>
+             <%%= _.titleize(step) %>
+            <%% } %>
+          </span>
+        </li>
       <%% }) %>
     </ol>
   </div>

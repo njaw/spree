@@ -17,6 +17,8 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
 
     renderFor: function(order, state) {
       state = state || order.attributes.state
+      // So it can be accessed by the checkout progress 'bar'
+      SpreeStore.Checkout.Controller.state = state
       orderView = Checkout[state + 'View']
       if (orderView != undefined) {
         SpreeStore.navigate("/checkout/" + state)
