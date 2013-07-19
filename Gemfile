@@ -7,7 +7,6 @@ gem 'jquery-rails'
 
 gem 'spree', :github => 'radar/spree', :branch => "master"
 gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => "master"
-gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => "master"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
