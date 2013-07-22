@@ -5,12 +5,14 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
     events: {
       "submit .edit_order": "updateOrder",
       "change #bcountry select": "updateStates",
+      "change #scountry select": "updateStates",
       "change #order_use_billing": "useBilling"
     },
 
     onShow: function() {
       // TODO: I didn't do this with a Backbone.Collection because it was too hard.
       // Seriously.
+      var updateCountrySelect = this.updateCountrySelect;
       $.get('/store/api/countries', { per_page: 1000 }, function(data) {
         $('#bcountry select').html('')
         _.each(data.countries, function(country) {
@@ -18,12 +20,19 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
           $('#bcountry select').append(option_tag)
           $('#scountry select').append(option_tag)
         })
+        var bill_address = order.attributes.bill_address;
+        var ship_address = order.attributes.ship_address;
+        var default_country_id = Spree.Settings.default_country_id;
+
+        updateCountrySelect("#bcountry select", (bill_address && bill_address.country_id) || default_country_id)
+        updateCountrySelect("#scountry select", (ship_address && ship_address.country_id) || default_country_id)
       })
-      if (Spree.Settings.default_country_id) {
-        $('#bcountry select').val(Spree.Settings.default_country_id)
-      }
-      $('#bcountry select').trigger('change')
     },
+
+    updateCountrySelect: function(element, id) {
+      $(element).val(id)
+      $(element).trigger('change')
+    }, 
 
     useBilling: function(e) {
       var shipping_inner = $('#shipping .inner')
