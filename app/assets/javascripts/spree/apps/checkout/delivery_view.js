@@ -12,7 +12,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
     },
 
     updateOrder: function(e) {
-      $(e.target).attr('disabled', 'disabled');
+      $(e.target).attr('disabled', true);
       e.stopPropagation();
       e.preventDefault();
       if (this.validate()) {
@@ -29,7 +29,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
           },
           error: function(xhr) {
             alert(xhr.responseText);
-            $(e.target).attr('disabled', '');
+            $(e.target).attr('disabled', false);
           }
         })
       }

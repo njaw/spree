@@ -16,7 +16,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
       e.stopPropagation();
       e.preventDefault();
       var submit_button = $(e.target).find("input[type='submit']")
-      submit_button.attr('disabled', 'disabled');
+      submit_button.attr('disabled', true);
       submit_button.slideUp(function() {
         $('#checkout #loading').show();
       });
@@ -33,9 +33,10 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
             SpreeStore.Checkout.Controller.renderFor(order)
           },
           error: function(xhr) {
-            submit_button.attr('disabled', '')
             submit_button.stop();
+            submit_button.slideDown();
             submit_button.show();
+            submit_button.attr('disabled', false);
             $('#checkout #loading').hide();
             var errors = JSON.parse(xhr.responseText).errors["payments.Credit Card"]
             var error_markup = _.template($('#payment_errors_template').text(), { errors: errors })

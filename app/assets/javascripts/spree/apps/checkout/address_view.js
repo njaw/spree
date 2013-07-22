@@ -83,7 +83,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
 
     updateOrder: function(e) {
       $('#errorExplanation').hide();
-      $(e.target).attr('disabled', 'disabled');
+      $(e.target).attr('disabled', true);
       var data = Backbone.Syphon.serialize(this)
       data['order_token'] = SpreeStore.currentOrderToken
       $.ajax({
@@ -96,7 +96,7 @@ SpreeStore.module('Checkout',function(Checkout, SpreeStore, Backbone,Marionette,
           SpreeStore.Checkout.Controller.renderFor(order, data.state)
         },
         error: function(xhr) {
-          $(e.target).attr('disabled', '');
+          $(e.target).attr('disabled', false);
           var errors = JSON.parse(xhr.responseText).errors
           var error_markup = _.template($('#errors_template').text(), { errors: errors })
           $('#errorExplanation').show().html(error_markup)
