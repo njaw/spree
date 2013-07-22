@@ -44,12 +44,20 @@ SpreeStore.getCurrentRoute = function() {
 }
 
 SpreeStore.on("initialize:before", function(){
-  $.get('/store/api/config/money', function(data) {
-    Spree.Money.Settings = data
+  $.ajax({
+    async: false,
+    url: '/store/api/config/money',
+    success: function(data) {
+      Spree.Money.Settings = data
+    }
   })
 
-  $.get('/store/api/config', function(data) {
-    Spree.Settings = data
+  $.ajax({
+    async: false,
+    url: '/store/api/config/',
+    success: function(data) {
+      Spree.Settings = data
+    }
   })
 })
 
