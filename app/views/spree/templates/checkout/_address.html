@@ -13,24 +13,25 @@
             <legend align="center">Billing Address</legend>
             <div class="inner" data-hook="billing_inner">
               <p class="field" id="bfirstname">
+                <%% console.log(order.attributes) %>
                 <label for="order_bill_address_attributes_firstname">First Name</label><span class="required">*</span><br>
-                <input class="required" id="order_bill_address_attributes_firstname" name="order[bill_address_attributes][firstname]" size="30" type="text">
+                <input class="required" id="order_bill_address_attributes_firstname" name="order[bill_address_attributes][firstname]" size="30" type="text" value="<%%= bill_address && bill_address.firstname %>">
               </p>
               <p class="field" id="blastname">
                 <label for="order_bill_address_attributes_lastname">Last Name</label><span class="required">*</span><br>
-                <input class="required" id="order_bill_address_attributes_lastname" name="order[bill_address_attributes][lastname]" size="30" type="text">
+                <input class="required" id="order_bill_address_attributes_lastname" name="order[bill_address_attributes][lastname]" size="30" type="text" value="<%%= bill_address && bill_address.lastname %>">
               </p>
               <p class="field" id="baddress1">
                 <label for="order_bill_address_attributes_address1">Street Address</label><span class="required">*</span><br>
-                <input class="required" id="order_bill_address_attributes_address1" name="order[bill_address_attributes][address1]" size="30" type="text">
+                <input class="required" id="order_bill_address_attributes_address1" name="order[bill_address_attributes][address1]" size="30" type="text" value="<%%= bill_address && bill_address.address1 %>">
               </p>
               <p class="field" id="baddress2">
-                <label for="order_bill_address_attributes_address2">Street Address (cont'd)</label><br>
-                <input id="order_bill_address_attributes_address2" name="order[bill_address_attributes][address2]" size="30" type="text">
+                <label for="order_bill_address_attributes_address2">Street Address (cont&apos;d)</label><br>
+                <input id="order_bill_address_attributes_address2" name="order[bill_address_attributes][address2]" size="30" type="text" value="<%%= bill_address && bill_address.address2 %>">
               </p>
               <p class="field" id="bcity">
                 <label for="order_bill_address_attributes_city">City</label><span class="required">*</span><br>
-                <input class="required" id="order_bill_address_attributes_city" name="order[bill_address_attributes][city]" size="30" type="text">
+                <input class="required" id="order_bill_address_attributes_city" name="order[bill_address_attributes][city]" size="30" type="text" value="<%%= bill_address && bill_address.city %>">
               </p>
               <p class="field" id="bcountry">
                 <label for="order_bill_address_attributes_country_id">Country</label><span class="required">*</span><br>
@@ -39,21 +40,21 @@
                 </span>
               </p>
 
-                <p class="field" id="bstate">
-                  <label for="order_bill_address_attributes_state_id">State</label><span class="required" id="bstate-required">*</span><br>
-                  <span id="bcountry-selection">
-                    <select class="required states" id="order_bill_address_attributes_state_id" name="order[bill_address_attributes][state_id]"></select>
-                    <input class="required state_name" name="order[bill_address_attributes][state_name]" style="display:none">
-                  </span>
-                </p>
+              <p class="field" id="bstate">
+                <label for="order_bill_address_attributes_state_id">State</label><span class="required" id="bstate-required">*</span><br>
+                <span id="bcountry-selection">
+                  <select class="required states" id="order_bill_address_attributes_state_id" name="order[bill_address_attributes][state_id]"></select>
+                  <input class="required state_name" name="order[bill_address_attributes][state_name]" style="display:none">
+                </span>
+              </p>
 
               <p class="field" id="bzipcode">
                 <label for="order_bill_address_attributes_zipcode">Zip</label><span class="required">*</span><br>
-                <input class="required" id="order_bill_address_attributes_zipcode" name="order[bill_address_attributes][zipcode]" size="30" type="text">
+                <input class="required" id="order_bill_address_attributes_zipcode" name="order[bill_address_attributes][zipcode]" size="30" type="text" value="<%%= bill_address && bill_address.zipcode %>">
               </p>
               <p class="field" id="bphone">
                 <label for="order_bill_address_attributes_phone">Phone</label><span class="required">*</span><br>
-                <input class="required" id="order_bill_address_attributes_phone" name="order[bill_address_attributes][phone]" size="30" type="tel">
+                <input class="required" id="order_bill_address_attributes_phone" name="order[bill_address_attributes][phone]" size="30" type="tel" value="<%%= bill_address && bill_address.phone %>">
               </p>
             </div>
           </fieldset>
@@ -70,23 +71,23 @@
             <div class="inner" data-hook="shipping_inner">
               <p class="field" id="sfirstname">
                 <label for="order_ship_address_attributes_firstname">First Name</label><span class="required">*</span><br>
-                <input class="required" id="order_ship_address_attributes_firstname" name="order[ship_address_attributes][firstname]" size="30" type="text">
+                <input class="required" id="order_ship_address_attributes_firstname" name="order[ship_address_attributes][firstname]" size="30" type="text" value="<%%= ship_address && ship_address.firstname %>">
               </p>
               <p class="field" id="slastname">
                 <label for="order_ship_address_attributes_lastname">Last Name</label><span class="required">*</span><br>
-                <input class="required" id="order_ship_address_attributes_lastname" name="order[ship_address_attributes][lastname]" size="30" type="text">
+                <input class="required" id="order_ship_address_attributes_lastname" name="order[ship_address_attributes][lastname]" size="30" type="text" value="<%%= ship_address && ship_address.lastname %>">
               </p>
               <p class="field" id="saddress1">
                 <label for="order_ship_address_attributes_address1">Street Address</label><span class="required">*</span><br>
-                <input class="required" id="order_ship_address_attributes_address1" name="order[ship_address_attributes][address1]" size="30" type="text">
+                <input class="required" id="order_ship_address_attributes_address1" name="order[ship_address_attributes][address1]" size="30" type="text" value="<%%= ship_address && ship_address.address1 %>">
               </p>
               <p class="field" id="saddress2">
-                <label for="order_ship_address_attributes_address2">Street Address (cont'd)</label><br>
-                <input id="order_ship_address_attributes_address2" name="order[ship_address_attributes][address2]" size="30" type="text">
+                <label for="order_ship_address_attributes_address2">Street Address (cont&apos;d)</label><br>
+                <input id="order_ship_address_attributes_address2" name="order[ship_address_attributes][address2]" size="30" type="text" value="<%%= ship_address && ship_address.address2 %>">
               </p>
               <p class="field" id="scity">
                 <label for="order_ship_address_attributes_city">City</label><span class="required">*</span><br>
-                <input class="required" id="order_ship_address_attributes_city" name="order[ship_address_attributes][city]" size="30" type="text">
+                <input class="required" id="order_ship_address_attributes_city" name="order[ship_address_attributes][city]" size="30" type="text" value="<%%= ship_address && ship_address.city %>">
               </p>
               <p class="field" id="scountry">
                 <label for="order_ship_address_attributes_country_id">Country</label><span class="required">*</span><br>
@@ -95,17 +96,21 @@
                 </span>
               </p>
 
-                <p class="field" id="sstate">
-                  <label for="order_ship_address_attributes_state">State</label><span class="required" id="sstate-required">*</span><br> 
-                </p>
+              <p class="field" id="sstate">
+                <label for="order_ship_address_attributes_state_id">State</label><span class="required" id="sstate-required">*</span><br>
+                <span id="scountry-selection">
+                  <select class="required states" id="order_ship_address_attributes_state_id" name="order[ship_address_attributes][state_id]"></select>
+                  <input class="required state_name" name="order[ship_address_attributes][state_name]" style="display:none" value="<%%= ship_address && ship_address.state_name %>">
+                </span>
+              </p>
 
               <p class="field" id="szipcode">
                 <label for="order_ship_address_attributes_zipcode">Zip</label><span class="required">*</span><br>
-                <input class="required" id="order_ship_address_attributes_zipcode" name="order[ship_address_attributes][zipcode]" size="30" type="text">
+                <input class="required" id="order_ship_address_attributes_zipcode" name="order[ship_address_attributes][zipcode]" size="30" type="text" value="<%%= ship_address && ship_address.zipcode %>">
               </p>
               <p class="field" id="sphone">
                 <label for="order_ship_address_attributes_phone">Phone</label><span class="required">*</span><br>
-                <input class="required" id="order_ship_address_attributes_phone" name="order[ship_address_attributes][phone]" size="30" type="tel">
+                <input class="required" id="order_ship_address_attributes_phone" name="order[ship_address_attributes][phone]" size="30" type="tel" value="<%%= ship_address && ship_address.phone %>">
               </p>
             </div>
           </fieldset>
