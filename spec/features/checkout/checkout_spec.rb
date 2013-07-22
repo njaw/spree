@@ -41,7 +41,7 @@ feature "Checkout", :js => true do
     click_button 'Checkout'
     wait_for_ajax
     page.current_url.should include("checkout/address")
-    page.find(".progress-steps .current").text.should == 'ADDRESS'
+    page.find(".progress-steps .current-first").text.should == 'ADDRESS'
     page.find(".progress-steps .next").text.should == 'DELIVERY'
   end
 
@@ -122,6 +122,21 @@ feature "Checkout", :js => true do
     page.current_url.should include("checkout/address")
     within("#checkout-summary") do
       page.should have_content("10 x iPad")
+    end
+  end
+
+  it "maintains address information" do
+    walkthrough_to_delivery
+    within(".progress-steps") do
+      click_link "Address"
+    end
+    within("#billing") do
+      find_field("First Name").value.should_not be_blank
+      find_field("Last Name").value.should_not be_blank
+      find_field("Street Address").value.should_not be_blank
+      find_field("City").value.should_not be_blank
+      find_field("Phone").value.should_not be_blank
+      find_field("Zip").value.should_not be_blank
     end
   end
 
