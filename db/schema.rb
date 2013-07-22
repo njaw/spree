@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130709023960) do
+ActiveRecord::Schema.define(:version => 20130719020118) do
 
   create_table "spree_activators", :force => true do |t|
     t.string   "description"
@@ -141,7 +141,6 @@ ActiveRecord::Schema.define(:version => 20130709023960) do
   end
 
   create_table "spree_inventory_units", :force => true do |t|
-    t.integer  "lock_version",            :default => 0
     t.string   "state"
     t.integer  "variant_id"
     t.integer  "order_id"
@@ -164,6 +163,7 @@ ActiveRecord::Schema.define(:version => 20130709023960) do
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
     t.string   "currency"
+    t.decimal  "cost_price", :precision => 8, :scale => 2
   end
 
   add_index "spree_line_items", ["order_id"], :name => "index_spree_line_items_on_order_id"
@@ -502,10 +502,10 @@ ActiveRecord::Schema.define(:version => 20130709023960) do
   create_table "spree_stock_items", :force => true do |t|
     t.integer  "stock_location_id"
     t.integer  "variant_id"
-    t.integer  "count_on_hand",     :default => 0,    :null => false
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
-    t.boolean  "backorderable",     :default => true
+    t.integer  "count_on_hand",     :default => 0,     :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "backorderable",     :default => false
   end
 
   add_index "spree_stock_items", ["stock_location_id", "variant_id"], :name => "stock_item_by_loc_and_var_id"
@@ -513,8 +513,8 @@ ActiveRecord::Schema.define(:version => 20130709023960) do
 
   create_table "spree_stock_locations", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.string   "address1"
     t.string   "address2"
     t.string   "city"
@@ -524,7 +524,7 @@ ActiveRecord::Schema.define(:version => 20130709023960) do
     t.string   "zipcode"
     t.string   "phone"
     t.boolean  "active",                 :default => true
-    t.boolean  "backorderable_default",  :default => true
+    t.boolean  "backorderable_default",  :default => false
     t.boolean  "propagate_all_variants", :default => true
   end
 
