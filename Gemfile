@@ -5,7 +5,7 @@ gem 'sqlite3'
 
 gem 'jquery-rails'
 
-gem 'spree', :github => 'radar/spree', :branch => "master"
+gem 'spree', :github => "spree/spree", :branch => "master"
 gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => "master"
 
 group :assets do
