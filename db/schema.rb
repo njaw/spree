@@ -471,8 +471,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.integer  "transaction_id"
     t.integer  "customer_id"
     t.string   "payment_type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_state_changes", force: true do |t|
