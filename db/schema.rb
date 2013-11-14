@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.string   "code"
     t.boolean  "advertise",    default: false
     t.string   "path"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_addresses", force: true do |t|
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.string   "company"
     t.integer  "state_id"
     t.integer  "country_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "spree_addresses", ["firstname"], name: "index_addresses_on_firstname"
@@ -60,8 +60,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.string   "label"
     t.boolean  "mandatory"
     t.boolean  "eligible",                                 default: true
-    t.datetime "created_at",                                              null: false
-    t.datetime "updated_at",                                              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "state"
   end
 
@@ -88,15 +88,15 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.string   "type"
     t.integer  "calculable_id"
     t.string   "calculable_type"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_configurations", force: true do |t|
     t.string   "name"
     t.string   "type",       limit: 50
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "spree_configurations", ["name", "type"], name: "index_spree_configurations_on_name_and_type"
@@ -121,8 +121,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.integer  "address_id"
     t.string   "gateway_customer_profile_id"
     t.string   "gateway_payment_profile_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_gateways", force: true do |t|
@@ -133,8 +133,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.string   "environment", default: "development"
     t.string   "server",      default: "test"
     t.boolean  "test_mode",   default: true
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_inventory_units", force: true do |t|
@@ -143,8 +143,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.integer  "order_id"
     t.integer  "shipment_id"
     t.integer  "return_authorization_id"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "pending",                 default: true
   end
 
@@ -157,8 +157,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.integer  "order_id"
     t.integer  "quantity",                                null: false
     t.decimal  "price",           precision: 8, scale: 2, null: false
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "currency"
     t.decimal  "cost_price",      precision: 8, scale: 2
     t.integer  "tax_category_id"
@@ -171,16 +171,16 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.integer  "source_id"
     t.string   "source_type"
     t.text     "details"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_option_types", force: true do |t|
     t.string   "name",         limit: 100
     t.string   "presentation", limit: 100
     t.integer  "position",                 default: 0, null: false
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_option_types_prototypes", id: false, force: true do |t|
@@ -193,8 +193,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.string   "name"
     t.string   "presentation"
     t.integer  "option_type_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_option_values_variants", id: false, force: true do |t|
@@ -221,8 +221,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.string   "payment_state"
     t.string   "email"
     t.text     "special_instructions"
-    t.datetime "created_at",                                                             null: false
-    t.datetime "updated_at",                                                             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "currency"
     t.string   "last_ip_address"
     t.integer  "created_by_id"
@@ -239,8 +239,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.boolean  "active",      default: true
     t.string   "environment", default: "development"
     t.datetime "deleted_at"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "display_on"
   end
 
@@ -253,8 +253,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.string   "state"
     t.string   "response_code"
     t.string   "avs_response"
-    t.datetime "created_at",                                                  null: false
-    t.datetime "updated_at",                                                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "identifier"
     t.string   "cvv_response_code"
     t.string   "cvv_response_message"
@@ -266,8 +266,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.text     "value"
     t.string   "key"
     t.string   "value_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "spree_preferences", ["key"], name: "index_spree_preferences_on_key", unique: true
@@ -282,16 +282,16 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.integer  "position"
     t.integer  "product_id"
     t.integer  "option_type_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_product_properties", force: true do |t|
     t.string   "value"
     t.integer  "product_id"
     t.integer  "property_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "position",    default: 0
   end
 
@@ -307,8 +307,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.string   "meta_keywords"
     t.integer  "tax_category_id"
     t.integer  "shipping_category_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "spree_products", ["available_on"], name: "index_spree_products_on_available_on"
@@ -350,8 +350,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.integer  "user_id"
     t.integer  "product_group_id"
     t.string   "type"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "spree_promotion_rules", ["product_group_id"], name: "index_promotion_rules_on_product_group_id"
@@ -368,8 +368,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
   create_table "spree_properties", force: true do |t|
     t.string   "name"
     t.string   "presentation", null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_properties_prototypes", id: false, force: true do |t|
@@ -379,8 +379,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
 
   create_table "spree_prototypes", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_return_authorizations", force: true do |t|
@@ -389,8 +389,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.decimal  "amount",            precision: 10, scale: 2, default: 0.0, null: false
     t.integer  "order_id"
     t.text     "reason"
-    t.datetime "created_at",                                               null: false
-    t.datetime "updated_at",                                               null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "stock_location_id"
   end
 
@@ -414,8 +414,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.integer  "order_id"
     t.integer  "address_id"
     t.string   "state"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "stock_location_id"
   end
 
@@ -424,15 +424,15 @@ ActiveRecord::Schema.define(version: 20131009014536) do
 
   create_table "spree_shipping_categories", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_shipping_method_categories", force: true do |t|
     t.integer  "shipping_method_id",   null: false
     t.integer  "shipping_category_id", null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "spree_shipping_method_categories", ["shipping_category_id"], name: "index_spree_shipping_method_categories_on_shipping_category_id"
@@ -442,8 +442,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.string   "name"
     t.string   "display_on"
     t.datetime "deleted_at"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "tracking_url"
     t.string   "admin_name"
   end
@@ -458,8 +458,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.integer  "shipping_method_id"
     t.boolean  "selected",                                   default: false
     t.decimal  "cost",               precision: 8, scale: 2, default: 0.0
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "spree_shipping_rates", ["shipment_id", "shipping_method_id"], name: "spree_shipping_rates_join_index", unique: true
@@ -482,8 +482,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.integer  "user_id"
     t.string   "stateful_type"
     t.string   "next_state"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_states", force: true do |t|
@@ -497,8 +497,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.integer  "stock_location_id"
     t.integer  "variant_id"
     t.integer  "count_on_hand",     default: 0,     null: false
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "backorderable",     default: false
     t.datetime "deleted_at"
   end
@@ -508,8 +508,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
 
   create_table "spree_stock_locations", force: true do |t|
     t.string   "name"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "address1"
     t.string   "address2"
     t.string   "city"
@@ -528,8 +528,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.integer  "stock_item_id"
     t.integer  "quantity",        default: 0
     t.string   "action"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "originator_id"
     t.string   "originator_type"
   end
@@ -541,8 +541,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.string   "reference"
     t.integer  "source_location_id"
     t.integer  "destination_location_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "number"
   end
 
@@ -555,8 +555,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.string   "description"
     t.boolean  "is_default",  default: false
     t.datetime "deleted_at"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_tax_rates", force: true do |t|
@@ -564,8 +564,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.integer  "zone_id"
     t.integer  "tax_category_id"
     t.boolean  "included_in_price",                          default: false
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "name"
     t.boolean  "show_rate_in_label",                         default: true
     t.datetime "deleted_at"
@@ -573,8 +573,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
 
   create_table "spree_taxonomies", force: true do |t|
     t.string   "name",                   null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "position",   default: 0
   end
 
@@ -591,8 +591,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
     t.text     "description"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "meta_title"
     t.string   "meta_description"
     t.string   "meta_keywords"
@@ -607,8 +607,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.integer  "permissable_id"
     t.string   "permissable_type"
     t.string   "token"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "spree_tokenized_permissions", ["permissable_id", "permissable_type"], name: "index_tokenized_name_and_type"
@@ -617,8 +617,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.string   "environment"
     t.string   "analytics_id"
     t.boolean  "active",       default: true
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_users", force: true do |t|
@@ -643,8 +643,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.datetime "reset_password_sent_at"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "spree_api_key",          limit: 48
     t.datetime "remember_created_at"
   end
@@ -672,8 +672,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.integer  "zoneable_id"
     t.string   "zoneable_type"
     t.integer  "zone_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_zones", force: true do |t|
@@ -681,8 +681,8 @@ ActiveRecord::Schema.define(version: 20131009014536) do
     t.string   "description"
     t.boolean  "default_tax",        default: false
     t.integer  "zone_members_count", default: 0
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
