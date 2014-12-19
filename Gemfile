@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.0'
-gem 'pg'
+gem 'sqlite3'
 gem 'jquery-rails'
 
 gem 'spree', :github => "spree/spree", :branch => "2-1-stable"
